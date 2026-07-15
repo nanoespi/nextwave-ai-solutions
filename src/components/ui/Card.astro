@@ -1,0 +1,61 @@
+---
+interface Props {
+  variant?: 'default' | 'ink' | 'voltage' | 'outlined';
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { variant = 'default', class: className, ...rest } = Astro.props;
+---
+
+<div class:list={['card', `card--${variant}`, className]} {...rest}>
+  <slot />
+</div>
+
+<style>
+  .card {
+    border-radius: 8px;
+    padding: 36px;
+  }
+
+  /* Default (warm bone) */
+  .card--default {
+    background: var(--bg-card);
+    border: 1px solid rgba(10, 14, 26, 0.08);
+    box-shadow: 0 1px 2px rgba(10, 14, 26, 0.02), 0 4px 16px rgba(10, 14, 26, 0.04);
+    transition: transform var(--dur-standard) var(--ease-brand),
+                box-shadow var(--dur-standard) var(--ease-brand);
+  }
+
+  .card--default:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(10, 14, 26, 0.04), 0 12px 32px rgba(10, 14, 26, 0.08);
+  }
+
+  /* Ink */
+  .card--ink {
+    background: var(--bg-ink);
+    color: var(--ink-on-dark);
+    border: 1px solid rgba(244, 241, 234, 0.10);
+    box-shadow: var(--shadow-hero);
+  }
+
+  /* Voltage */
+  .card--voltage {
+    background: var(--voltage);
+    color: var(--voltage-ink);
+    border: 1px solid var(--voltage-deep);
+    box-shadow: 0 4px 32px rgba(168, 204, 36, 0.18);
+  }
+
+  /* Outlined */
+  .card--outlined {
+    background: transparent;
+    border: 1px solid rgba(10, 14, 26, 0.20);
+    transition: border-color var(--dur-standard) var(--ease-brand);
+  }
+
+  .card--outlined:hover {
+    border-color: rgba(10, 14, 26, 0.40);
+  }
+</style>

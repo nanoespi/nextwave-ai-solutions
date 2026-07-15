@@ -1,0 +1,261 @@
+---
+import Button from '../ui/Button.astro';
+import navData from '../../data/nav.json';
+
+const calLink = import.meta.env.PUBLIC_CAL_LINK;
+const pathname = Astro.url.pathname;
+
+// Hash anchor links can't have server-side active state (scroll-position dependent).
+// Only exact full-page routes are marked active.
+function isActive(href: string): boolean {
+  if (href.startsWith('/#')) return false;
+  return pathname === href || pathname === href + '/';
+}
+---
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a href="/" class="site-header__logo" aria-label="NextWave AI Solutions home">
+      <img src="/images/wordmark-dark.svg" alt="NextWave AI Solutions" class="header-wordmark" />
+    </a>
+
+    <nav class="site-header__nav" aria-label="Main navigation">
+      {navData.map((item) => (
+        <a
+          href={item.href}
+          class:list={['nav-link', { 'nav-link--active': isActive(item.href) }]}
+          aria-current={isActive(item.href) ? 'page' : undefined}
+        >{item.label}</a>
+      ))}
+    </nav>
+
+    <div class="site-header__actions">
+      <Button variant="voltage" size="md" data-cal-link={calLink} data-cal-config='{"layout":"modal"}' data-track="CTA Clicked">Book a Call</Button>
+    </div>
+
+    <button
+      class="hamburger"
+      id="hamburger-btn"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="mobile-drawer"
+    >
+      <span class="hamburger__bar"></span>
+      <span class="hamburger__bar"></span>
+      <span class="hamburger__bar"></span>
+    </button>
+  </div>
+
+  <div class="mobile-drawer" id="mobile-drawer" role="dialog" aria-label="Navigation menu" aria-modal="true" hidden>
+    <nav aria-label="Mobile navigation">
+      {navData.map((item) => (
+        <a
+          href={item.href}
+          class:list={['mobile-nav-link', { 'mobile-nav-link--active': isActive(item.href) }]}
+          aria-current={isActive(item.href) ? 'page' : undefined}
+        >{item.label}</a>
+      ))}
+    </nav>
+    <div class="mobile-drawer__cta">
+      <Button variant="voltage" size="md" data-cal-link={calLink} data-cal-config='{"layout":"modal"}' data-track="CTA Clicked">Book a Call</Button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(10, 14, 26, 0.96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule-on-dark);
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 64px;
+  }
+
+  /* Logo */
+  .site-header__logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .header-wordmark {
+    height: 34px;
+    width: auto;
+    display: block;
+  }
+
+  /* Desktop nav */
+  .site-header__nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .nav-link {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--ink-on-dark-dim);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 2px;
+    transition: color var(--dur-fast) ease-out;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--ink-on-dark);
+    transition: width 0.3s var(--ease-brand);
+  }
+
+  .nav-link:hover,
+  .nav-link--active {
+    color: var(--ink-on-dark);
+  }
+
+  .nav-link:hover::after,
+  .nav-link--active::after {
+    width: 100%;
+  }
+
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+  }
+
+  /* Hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .hamburger__bar {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--ink-on-dark);
+    transition: transform var(--dur-fast) ease-out, opacity var(--dur-fast) ease-out;
+  }
+
+  .hamburger[aria-expanded="true"] .hamburger__bar:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+
+  .hamburger[aria-expanded="true"] .hamburger__bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger[aria-expanded="true"] .hamburger__bar:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  /* Mobile drawer */
+  .mobile-drawer {
+    position: fixed;
+    inset: 64px 0 0;
+    background: var(--bg-ink);
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+    z-index: 99;
+    gap: 8px;
+  }
+
+  .mobile-drawer[hidden] {
+    display: none;
+  }
+
+  .mobile-nav-link {
+    font-family: var(--font-sans);
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--ink-on-dark-dim);
+    text-decoration: none;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule-on-dark);
+    transition: color var(--dur-fast) ease-out;
+  }
+
+  .mobile-nav-link:hover,
+  .mobile-nav-link--active {
+    color: var(--ink-on-dark);
+  }
+
+  .mobile-drawer__cta {
+    margin-top: 24px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .site-header__nav,
+    .site-header__actions {
+      display: none;
+    }
+
+    .hamburger {
+      display: flex;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .site-header__inner {
+      padding: 0 20px;
+    }
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('hamburger-btn') as HTMLButtonElement | null;
+  const drawer = document.getElementById('mobile-drawer') as HTMLElement | null;
+
+  if (btn && drawer) {
+    btn.addEventListener('click', () => {
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      if (isOpen) {
+        drawer.setAttribute('hidden', '');
+        document.body.style.overflow = '';
+      } else {
+        drawer.removeAttribute('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+
+    // Close on nav link click
+    drawer.querySelectorAll('.mobile-nav-link').forEach((link) => {
+      link.addEventListener('click', () => {
+        btn.setAttribute('aria-expanded', 'false');
+        drawer.setAttribute('hidden', '');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+</script>

@@ -1,0 +1,74 @@
+:root {
+  /* Surfaces */
+  --bg-bone: #F4F1EA;
+  --bg-bone-warm: #EDE9DF;
+  --bg-bone-cool: #F8F5EF;
+  --bg-card: #EDE9DF;
+  --bg-ink: #0A0E1A;
+  --bg-ink-deep: #05070F;
+  --bg-ink-soft: #12162A;
+
+  /* Ink (text) */
+  --ink-primary: #0A0E1A;
+  --ink-secondary: #3E4152;
+  --ink-tertiary: #6E7080;
+  --ink-on-dark: #F4F1EA;
+  --ink-on-dark-dim: rgba(244,241,234,0.68);
+  --ink-on-dark-soft: rgba(244,241,234,0.42);
+
+  /* Voltage (accent) */
+  --voltage: #D4FF3D;
+  --voltage-deep: #A8CC24;
+  --voltage-bright: #E1FF6B;
+  --voltage-dim: rgba(212,255,61,0.15);
+  --voltage-glow: rgba(212,255,61,0.06);
+  --voltage-wash: rgba(212,255,61,0.03);
+  --voltage-ink: #1A2005;
+
+  /* Signal (neutral structural) */
+  --signal: #8A8A85;
+  --signal-light: #B5B5B0;
+  --signal-deep: #4E4E48;
+  --signal-dim: rgba(138,138,133,0.14);
+  --signal-wash: rgba(138,138,133,0.06);
+
+  /* Rules */
+  --rule-hairline: rgba(10,14,26,0.10);
+  --rule-mid: rgba(10,14,26,0.20);
+  --rule-strong: rgba(10,14,26,0.36);
+  --rule-voltage: rgba(212,255,61,0.40);
+  --rule-on-dark: rgba(244,241,234,0.14);
+  --rule-on-dark-strong: rgba(244,241,234,0.28);
+
+  /* Shadows */
+  --shadow-soft: 0 1px 2px rgba(10,14,26,0.02), 0 4px 12px rgba(10,14,26,0.04);
+  --shadow-raised: 0 2px 4px rgba(10,14,26,0.04), 0 12px 32px rgba(10,14,26,0.08);
+  --shadow-hero: 0 4px 32px rgba(10,14,26,0.20);
+  --shadow-voltage: 0 8px 32px rgba(168,204,36,0.24);
+
+  /* Typography */
+  --font-sans: 'General Sans', 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Transitions */
+  --ease-brand: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 0.25s;
+  --dur-standard: 0.6s;
+  --dur-slow: 1.2s;
+
+  /* Layout */
+  --max-width: 1200px;
+  --max-width-reading: 680px;
+  --max-width-display: 1440px;
+
+  /* Stage gradient */
+  --stage-gradient-ramp: linear-gradient(90deg, rgba(138,138,133,0.35) 0%, rgba(138,138,133,0.60) 22%, rgba(10,14,26,0.75) 45%, #0A0E1A 65%, #4E4E48 82%, #D4FF3D 100%);
+
+  /* Artifact colors */
+  --artifact-diagnostic: #6E7080;
+  --artifact-charter: #0A0E1A;
+  --artifact-brief: #3E4152;
+  --artifact-dashboard: #4E4E48;
+  --artifact-playbook: #0A0E1A;
+  --artifact-scale-kit: #D4FF3D;
+}

@@ -1,0 +1,376 @@
+---
+---
+
+<div class="emergent-order" aria-hidden="true">
+  <canvas class="particle-canvas" id="emergent-canvas"></canvas>
+  <div class="particle-static" id="emergent-static" aria-hidden="true"></div>
+</div>
+
+<style>
+  .emergent-order {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .particle-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .particle-static {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle, rgba(212, 255, 61, 0.4) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.4;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .particle-canvas {
+      display: none;
+    }
+
+    .particle-static {
+      display: block;
+    }
+  }
+</style>
+
+<script>
+(function () {
+  const canvas = document.getElementById('emergent-canvas') as HTMLCanvasElement | null;
+  if (!canvas) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  // Base: bone at 90% opacity. Voltage: full yellow.
+  const BASE:    [number, number, number, number] = [244, 241, 234, 0.90];
+  const VOLTAGE: [number, number, number, number] = [212, 255,  61, 1.00];
+
+  const PATTERNS = ['grid', 'radial', 'wave', 'graph', 'bars', 'diagonal'] as const;
+  type Pattern = typeof PATTERNS[number];
+
+  interface Particle {
+    x: number; y: number;
+    tx: number; ty: number;
+    vx: number; vy: number;
+    dvx: number; dvy: number;   // dissolve velocity — set once, used every frame
+    size: number;
+    r: number; g: number; b: number; a: number; // current color as components
+    staggerDelay: number;
+  }
+
+  let width = 0, height = 0;
+  let particles: Particle[] = [];
+  let animationId = 0;
+  let currentPattern = 0;
+  let phase: 'chaos' | 'organize' | 'hold' | 'dissolve' = 'chaos';
+  let phaseStart = 0;
+  let chaosDuration = 0;   // set once when entering chaos
+  let holdDuration = 0;    // set once when entering hold
+  let frameCount = 0, lastFpsCheck = 0, skipFrames = false;
+
+  function randBetween(a: number, b: number): number {
+    return a + Math.random() * (b - a);
+  }
+
+  function lerpRGBA(
+    from: [number,number,number,number],
+    to:   [number,number,number,number],
+    t: number
+  ): [number, number, number, number] {
+    return [
+      from[0] + (to[0] - from[0]) * t,
+      from[1] + (to[1] - from[1]) * t,
+      from[2] + (to[2] - from[2]) * t,
+      from[3] + (to[3] - from[3]) * t,
+    ];
+  }
+
+  function ease(t: number): number {
+    return 1 - Math.pow(1 - t, 3);
+  }
+
+  function lerp(a: number, b: number, t: number): number {
+    return a + (b - a) * t;
+  }
+
+  function count(): number {
+    return Math.floor(Math.min(400, (width * height) / 4000));
+  }
+
+  function resize(): void {
+    const rect = canvas!.parentElement?.getBoundingClientRect();
+    if (!rect) return;
+    width = rect.width;
+    height = rect.height;
+    canvas!.width = width * devicePixelRatio;
+    canvas!.height = height * devicePixelRatio;
+    canvas!.style.width = width + 'px';
+    canvas!.style.height = height + 'px';
+    ctx!.scale(devicePixelRatio, devicePixelRatio);
+    initParticles();
+  }
+
+  function initParticles(): void {
+    const n = count();
+    particles = Array.from({ length: n }, () => ({
+      x: randBetween(0, width),
+      y: randBetween(0, height),
+      tx: 0, ty: 0,
+      vx: randBetween(-0.5, 0.5),
+      vy: randBetween(-0.5, 0.5),
+      dvx: 0, dvy: 0,
+      size: randBetween(2.5, 4.5),
+      r: BASE[0], g: BASE[1], b: BASE[2], a: BASE[3],
+      staggerDelay: Math.random() * 800,
+    }));
+    chaosDuration = randBetween(3000, 5000);
+    phase = 'chaos';
+    phaseStart = performance.now();
+  }
+
+  function getTargets(pattern: Pattern): { x: number; y: number }[] {
+    const n = particles.length;
+    const cx = width / 2;
+    const cy = height / 2;
+
+    if (pattern === 'grid') {
+      const cols = Math.ceil(Math.sqrt(n * (width / height)));
+      const rows = Math.ceil(n / cols);
+      const gw = Math.min(width * 0.8, 700);
+      const gh = Math.min(height * 0.8, 500);
+      const sx = cx - gw / 2;
+      const sy = cy - gh / 2;
+      return Array.from({ length: n }, (_, i) => ({
+        x: sx + (i % cols) * (gw / Math.max(cols - 1, 1)),
+        y: sy + Math.floor(i / cols) * (gh / Math.max(rows - 1, 1)),
+      }));
+    }
+
+    if (pattern === 'radial') {
+      const rings = 5;
+      return Array.from({ length: n }, (_, i) => {
+        const ring = Math.floor((i / n) * rings);
+        const r = ((ring + 1) / rings) * Math.min(cx, cy) * 0.85;
+        const angle = (i / Math.max(1, n / rings)) * Math.PI * 2;
+        return { x: cx + Math.cos(angle) * r, y: cy + Math.sin(angle) * r };
+      });
+    }
+
+    if (pattern === 'wave') {
+      return Array.from({ length: n }, (_, i) => {
+        const t = i / n;
+        return {
+          x: width * 0.1 + t * width * 0.8,
+          y: cy + Math.sin(t * Math.PI * 6) * height * 0.25,
+        };
+      });
+    }
+
+    if (pattern === 'graph') {
+      const nodes = 12;
+      const nodePos = Array.from({ length: nodes }, (_, i) => {
+        const angle = (i / nodes) * Math.PI * 2;
+        const r = Math.min(cx, cy) * 0.65;
+        return { x: cx + Math.cos(angle) * r, y: cy + Math.sin(angle) * r };
+      });
+      return Array.from({ length: n }, (_, i) => {
+        const node = nodePos[i % nodes];
+        return { x: node.x + randBetween(-8, 8), y: node.y + randBetween(-8, 8) };
+      });
+    }
+
+    if (pattern === 'bars') {
+      const bars = 8;
+      return Array.from({ length: n }, (_, i) => {
+        const bar = i % bars;
+        const bx = width * 0.1 + bar * (width * 0.8 / bars) + (width * 0.8 / bars) / 2;
+        const barH = ((bar + 1) / bars) * height * 0.6;
+        const perBar = Math.ceil(n / bars);
+        return {
+          x: bx + randBetween(-6, 6),
+          y: cy + height * 0.1 - (i % perBar) * (barH / perBar),
+        };
+      });
+    }
+
+    if (pattern === 'diagonal') {
+      return Array.from({ length: n }, (_, i) => {
+        const t = i / n;
+        const lines = 6;
+        const line = i % lines;
+        const offset = (line / lines) * height * 0.6 - height * 0.3;
+        return {
+          x: width * 0.1 + t * width * 0.8,
+          y: cy + offset + t * height * 0.2,
+        };
+      });
+    }
+
+    return particles.map((p) => ({ x: p.x, y: p.y }));
+  }
+
+  function enterDissolve(now: number): void {
+    const cx = width / 2;
+    const cy = height / 2;
+    particles.forEach((p) => {
+      // Each particle gets a fixed outward+random scatter velocity (set ONCE here)
+      const dx = p.x - cx;
+      const dy = p.y - cy;
+      const dist = Math.hypot(dx, dy) || 1;
+      const speed = randBetween(1.0, 2.8);
+      p.dvx = (dx / dist) * speed * 0.6 + randBetween(-0.8, 0.8);
+      p.dvy = (dy / dist) * speed * 0.6 + randBetween(-0.8, 0.8);
+    });
+    phase = 'dissolve';
+    phaseStart = now;
+  }
+
+  function enterChaos(now: number): void {
+    currentPattern = (currentPattern + 1) % PATTERNS.length;
+    particles.forEach((p) => {
+      // Carry dissolve momentum forward — no teleportation
+      p.vx = p.dvx * 0.35;
+      p.vy = p.dvy * 0.35;
+      p.r = BASE[0]; p.g = BASE[1]; p.b = BASE[2]; p.a = BASE[3];
+      p.staggerDelay = Math.random() * 800;
+    });
+    chaosDuration = randBetween(3000, 5000);
+    phase = 'chaos';
+    phaseStart = now;
+  }
+
+  function tick(now: number): void {
+    animationId = requestAnimationFrame(tick);
+
+    frameCount++;
+    if (now - lastFpsCheck > 1000) {
+      skipFrames = frameCount < 30;
+      frameCount = 0;
+      lastFpsCheck = now;
+    }
+    if (skipFrames && frameCount % 2 !== 0) return;
+
+    const elapsed = now - phaseStart;
+    ctx!.clearRect(0, 0, width, height);
+
+    if (phase === 'chaos') {
+      particles.forEach((p) => {
+        p.vx += randBetween(-0.08, 0.08);
+        p.vy += randBetween(-0.08, 0.08);
+        p.vx *= 0.97;
+        p.vy *= 0.97;
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0) p.x = width;
+        else if (p.x > width) p.x = 0;
+        if (p.y < 0) p.y = height;
+        else if (p.y > height) p.y = 0;
+        // Smoothly restore to base color (particles entering from dissolve may be off)
+        p.r = lerp(p.r, BASE[0], 0.08);
+        p.g = lerp(p.g, BASE[1], 0.08);
+        p.b = lerp(p.b, BASE[2], 0.08);
+        p.a = lerp(p.a, BASE[3], 0.08);
+      });
+
+      if (elapsed > chaosDuration) {
+        const targets = getTargets(PATTERNS[currentPattern]);
+        particles.forEach((p, i) => {
+          p.tx = targets[i]?.x ?? p.x;
+          p.ty = targets[i]?.y ?? p.y;
+        });
+        phase = 'organize';
+        phaseStart = now;
+      }
+
+    } else if (phase === 'organize') {
+      const ORGANIZE_DURATION = 2800;
+      const phaseT = Math.min(elapsed / ORGANIZE_DURATION, 1);
+
+      particles.forEach((p) => {
+        const pT = Math.max(0, (elapsed - p.staggerDelay) / (ORGANIZE_DURATION - p.staggerDelay));
+        const et = ease(Math.min(pT, 1));
+        p.x = lerp(p.x, p.tx, 0.05 + et * 0.06);
+        p.y = lerp(p.y, p.ty, 0.05 + et * 0.06);
+
+        const dist = Math.hypot(p.x - p.tx, p.y - p.ty);
+        const arrivalT = Math.max(0, 1 - dist / 80);
+        const [tr, tg, tb, ta] = lerpRGBA(BASE, VOLTAGE, ease(arrivalT));
+        p.r = lerp(p.r, tr, 0.06);
+        p.g = lerp(p.g, tg, 0.06);
+        p.b = lerp(p.b, tb, 0.06);
+        p.a = lerp(p.a, ta, 0.06);
+      });
+
+      if (phaseT >= 1) {
+        particles.forEach((p) => {
+          p.x = p.tx; p.y = p.ty;
+          p.r = VOLTAGE[0]; p.g = VOLTAGE[1]; p.b = VOLTAGE[2]; p.a = VOLTAGE[3];
+        });
+        holdDuration = randBetween(1500, 2500);
+        phase = 'hold';
+        phaseStart = now;
+      }
+
+    } else if (phase === 'hold') {
+      const breathe = 1 + Math.sin(elapsed * 0.003) * 0.012;
+      const cx = width / 2, cy = height / 2;
+      particles.forEach((p) => {
+        p.x = p.tx * breathe + (1 - breathe) * cx;
+        p.y = p.ty * breathe + (1 - breathe) * cy;
+        p.r = VOLTAGE[0]; p.g = VOLTAGE[1]; p.b = VOLTAGE[2]; p.a = VOLTAGE[3];
+      });
+
+      if (elapsed > holdDuration) enterDissolve(now);
+
+    } else if (phase === 'dissolve') {
+      const DISSOLVE_DURATION = 1800;
+      const t = Math.min(elapsed / DISSOLVE_DURATION, 1);
+      // Ease-in: slow start, accelerate toward end
+      const speed = t * t;
+
+      particles.forEach((p) => {
+        p.x += p.dvx * speed * 1.8;
+        p.y += p.dvy * speed * 1.8;
+        const [tr, tg, tb, ta] = lerpRGBA(VOLTAGE, BASE, ease(t));
+        p.r = tr; p.g = tg; p.b = tb; p.a = ta;
+      });
+
+      if (t >= 1) enterChaos(now);
+    }
+
+    // Draw all particles
+    particles.forEach((p) => {
+      ctx!.beginPath();
+      ctx!.arc(p.x, p.y, p.size / 2, 0, Math.PI * 2);
+      ctx!.fillStyle = `rgba(${p.r|0},${p.g|0},${p.b|0},${p.a.toFixed(3)})`;
+      ctx!.fill();
+    });
+  }
+
+  let resizeTimer = 0;
+  const resizeObserver = new ResizeObserver(() => {
+    clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(() => {
+      if (animationId) cancelAnimationFrame(animationId);
+      ctx!.setTransform(1, 0, 0, 1, 0, 0);
+      resize();
+      animationId = requestAnimationFrame(tick);
+    }, 150);
+  });
+
+  resize();
+  animationId = requestAnimationFrame(tick);
+
+  if (canvas.parentElement) resizeObserver.observe(canvas.parentElement);
+})();
+</script>

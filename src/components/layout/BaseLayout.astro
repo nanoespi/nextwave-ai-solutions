@@ -1,0 +1,100 @@
+---
+import '../../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = 'NextWave AI Solutions: Serious AI. Built locally.',
+  description = 'We build AI automation systems for local service businesses. Missed revenue recovered. Processes systematized. Built in Jonesboro, AR.',
+  ogImage = '/images/og/og-default.png',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(ogImage, Astro.site);
+const isProd = import.meta.env.PROD;
+const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="NextWave AI Solutions" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <!-- Fonts: General Sans (Söhne fallback) via Fontshare -->
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Fonts: JetBrains Mono (Söhne Mono fallback) via Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" href="/images/monogram-light.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Cal.com embed SDK -->
+    <script is:inline async src="https://app.cal.com/embed/embed.js"></script>
+    <script is:inline>
+      window.addEventListener('load', function () {
+        if (!window.Cal) return;
+        Cal('init', { origin: 'https://app.cal.com' });
+        Cal('ui', {
+          theme: 'dark',
+          styles: { branding: { brandColor: '#D4FF3D' } },
+          hideEventTypeDetails: false,
+        });
+      });
+    </script>
+
+    {isProd && plausibleDomain && (
+      <script
+        is:inline
+        defer
+        data-domain={plausibleDomain}
+        src="https://plausible.io/js/script.js"
+      />
+    )}
+  </head>
+  <body>
+    <slot />
+    <!-- ChatWidget mounts here (T21 / T22) -->
+    <script>
+      import { trackEvent } from '../../lib/analytics';
+      document.querySelectorAll<HTMLElement>('[data-track]').forEach((el) => {
+        el.addEventListener('click', () => {
+          const event = el.dataset.track;
+          if (event) trackEvent(event);
+        });
+      });
+    </script>
+  </body>
+</html>

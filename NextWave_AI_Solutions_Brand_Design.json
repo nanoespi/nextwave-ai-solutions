@@ -1,0 +1,580 @@
+{
+  "brandDocumentationVersion": "1.0.0",
+  "product": "NextWave AI Solutions - Brand Design",
+  "theme": {
+    "name": "The Near Frontier",
+    "description": "A modernist identity for a serious AI firm that has already seen where things are going and is calmly building. The brand reads as unmistakably contemporary without performing the future: warm-bone surfaces, near-black ink for gravitas, and a single confident chartreuse accent (Voltage) that carries the entire personality. Motion is present throughout but choreographed rather than decorative. One signature 3D moment (an emergent-order particle system) carries the visual signature. Everything else is craft-grade typography, generous whitespace, and cinematically slow transitions. The reference bar is Linear, Vercel, Anthropic, and Instrument for craft; Pentagram for editorial confidence. Deliberately outside the AI-vendor visual bucket (no electric blue, no purple, no holographic gradients, no HUD tropes). The dual-audience test the brand must pass: a Jonesboro business owner reads it as 'serious operation, real people' and a sophisticated coastal buyer reads it as 'peer-level, they know where the frontier is.' Both audiences read the same site as serious. That is the only signal that scales from Jonesboro to national."
+  },
+  "colorTokens": {
+    "bgBone": "#F4F1EA",
+    "bgBoneWarm": "#EDE9DF",
+    "bgBoneCool": "#F8F5EF",
+    "bgCard": "#EDE9DF",
+    "bgInk": "#0A0E1A",
+    "bgInkDeep": "#05070F",
+    "bgInkSoft": "#12162A",
+
+    "inkPrimary": "#0A0E1A",
+    "inkSecondary": "#3E4152",
+    "inkTertiary": "#6E7080",
+    "inkOnDark": "#F4F1EA",
+    "inkOnDarkDim": "rgba(244,241,234,0.68)",
+    "inkOnDarkSoft": "rgba(244,241,234,0.42)",
+
+    "voltagePrimary": "#D4FF3D",
+    "voltageDeep": "#A8CC24",
+    "voltageBright": "#E1FF6B",
+    "voltageDim": "rgba(212,255,61,0.15)",
+    "voltageGlow": "rgba(212,255,61,0.06)",
+    "voltageWash": "rgba(212,255,61,0.03)",
+    "voltageInk": "#1A2005",
+
+    "signalPrimary": "#8A8A85",
+    "signalLight": "#B5B5B0",
+    "signalDeep": "#4E4E48",
+    "signalDim": "rgba(138,138,133,0.14)",
+    "signalWash": "rgba(138,138,133,0.06)",
+
+    "stageDiscovery": "rgba(138,138,133,0.35)",
+    "stageArchitecture": "rgba(138,138,133,0.60)",
+    "stageBuild": "rgba(10,14,26,0.75)",
+    "stageRuntime": "#0A0E1A",
+    "stageSystematization": "#4E4E48",
+    "stageScaleReady": "#D4FF3D",
+    "stageGradientRamp": "linear-gradient(90deg, rgba(138,138,133,0.35) 0%, rgba(138,138,133,0.60) 22%, rgba(10,14,26,0.75) 45%, #0A0E1A 65%, #4E4E48 82%, #D4FF3D 100%)",
+
+    "artifactDiagnostic": "#6E7080",
+    "artifactCharter": "#0A0E1A",
+    "artifactBrief": "#3E4152",
+    "artifactDashboard": "#4E4E48",
+    "artifactPlaybook": "#0A0E1A",
+    "artifactScaleKit": "#D4FF3D",
+
+    "ruleHairline": "rgba(10,14,26,0.10)",
+    "ruleMid": "rgba(10,14,26,0.20)",
+    "ruleStrong": "rgba(10,14,26,0.36)",
+    "ruleVoltage": "rgba(212,255,61,0.40)",
+    "ruleOnDark": "rgba(244,241,234,0.14)",
+    "ruleOnDarkStrong": "rgba(244,241,234,0.28)",
+
+    "shadowSoft": "rgba(10,14,26,0.04)",
+    "shadowMid": "rgba(10,14,26,0.08)",
+    "shadowDeep": "rgba(10,14,26,0.16)",
+    "shadowVoltage": "rgba(168,204,36,0.20)"
+  },
+  "typography": {
+    "fontFamilies": {
+      "primary": ["Söhne", "General Sans", "Inter", "system-ui", "sans-serif"],
+      "mono": ["Söhne Mono", "JetBrains Mono", "ui-monospace", "monospace"],
+      "notes": "Single-family discipline. Söhne (Klim Type Foundry, licensed) throughout, with General Sans (Indian Type Foundry, free) as the primary fallback for early-stage budgets. Serif fallback is intentionally absent: the brand's editorial confidence comes from typographic hierarchy in a single family, not from serif/sans contrast."
+    },
+    "weights": {
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700
+    },
+    "scales": {
+      "displayHero": {
+        "fontFamily": "Söhne",
+        "fontWeight": 500,
+        "fontSize": "clamp(56px, 8vw, 112px)",
+        "lineHeight": 1.02,
+        "letterSpacing": "-0.03em",
+        "rationale": "Large, spare, and set at medium weight rather than bold. Contemporary serious-tech register signals confidence through scale and restraint rather than through weight. Reference: Linear and Vercel display type."
+      },
+      "h1": {
+        "fontFamily": "Söhne",
+        "fontWeight": 500,
+        "fontSize": "clamp(40px, 5vw, 72px)",
+        "lineHeight": 1.06,
+        "letterSpacing": "-0.02em"
+      },
+      "h2": {
+        "fontFamily": "Söhne",
+        "fontWeight": 500,
+        "fontSize": "clamp(28px, 3.5vw, 48px)",
+        "lineHeight": 1.15,
+        "letterSpacing": "-0.015em"
+      },
+      "h3": {
+        "fontFamily": "Söhne",
+        "fontWeight": 500,
+        "fontSize": "24px-32px",
+        "lineHeight": 1.25,
+        "letterSpacing": "-0.01em"
+      },
+      "labelSmall": {
+        "fontFamily": "Söhne",
+        "fontWeight": 600,
+        "fontSize": "12px-13px",
+        "letterSpacing": "0.12em",
+        "textTransform": "uppercase",
+        "rationale": "Wide-tracked all-caps in the primary sans. Used for editorial labels (section eyebrows, footer categories, artifact classifications). Deliberate and small, never decorative."
+      },
+      "body": {
+        "fontFamily": "Söhne",
+        "fontWeight": 400,
+        "fontSize": "clamp(17px, 1.5vw, 19px)",
+        "lineHeight": 1.65,
+        "rationale": "Set slightly larger than typical web body for editorial pacing. Generous line-height signals unhurried reading."
+      },
+      "bodyLong": {
+        "fontFamily": "Söhne",
+        "fontWeight": 400,
+        "fontSize": "clamp(19px, 1.6vw, 21px)",
+        "lineHeight": 1.7,
+        "rationale": "For manifesto-length content and long-form pages. The extra size and line-height carry the reader through sustained prose."
+      },
+      "bodySmall": {
+        "fontFamily": "Söhne",
+        "fontWeight": 400,
+        "fontSize": "15px",
+        "lineHeight": 1.55
+      },
+      "caption": {
+        "fontFamily": "Söhne",
+        "fontWeight": 500,
+        "fontSize": "13px",
+        "lineHeight": 1.45,
+        "color": "inkSecondary"
+      },
+      "mono": {
+        "fontFamily": "Söhne Mono",
+        "fontWeight": 500,
+        "fontSize": "12px-13px",
+        "letterSpacing": "0.02em",
+        "textTransform": "uppercase",
+        "rationale": "Mono is reserved for technical tags, artifact codes, and one-off editorial marks. Never used for prose."
+      },
+      "stats": {
+        "fontFamily": "Söhne",
+        "fontWeight": 500,
+        "fontSize": "clamp(64px, 9vw, 128px)",
+        "lineHeight": 0.95,
+        "letterSpacing": "-0.04em",
+        "rationale": "Large statistic display for hero metrics. Set tighter than display headlines because the number is the point."
+      }
+    }
+  },
+  "logoSpec": {
+    "primary": {
+      "fontFamily": "Söhne",
+      "fontWeight": 500,
+      "fontSize": "20px",
+      "letterSpacing": "-0.005em",
+      "wordColors": {
+        "NextWave": "#0A0E1A",
+        "AI Solutions": "#6E7080"
+      },
+      "treatment": "'NextWave' set in ink at medium weight, 'AI Solutions' immediately following in tertiary ink at the same weight. The two-tone treatment holds the firm's name as primary and the descriptor as classification. No custom letterforms, no icon, no mark. The typography is the identity."
+    },
+    "wordmark": {
+      "abbreviation": "NW",
+      "fontFamily": "Söhne",
+      "fontWeight": 600,
+      "fontSize": "18px-24px",
+      "letterSpacing": "0",
+      "color": "#0A0E1A",
+      "treatment": "Used in compact headers, favicons, document corners. When rendered against ink, use bone (#F4F1EA). When rendered as a hero mark, may use voltage for the 'W'."
+    },
+    "voltageAccent": {
+      "usage": "A single voltage-colored dot or short underline may be paired with the wordmark on high-emphasis surfaces (hero, footer signature, business cards). Reserved for identity-anchor moments, never as general decoration."
+    }
+  },
+  "componentStyles": {
+    "tag": {
+      "fontFamily": "Söhne Mono",
+      "fontSize": "11px",
+      "fontWeight": 500,
+      "background": "transparent",
+      "border": "1px solid rgba(10,14,26,0.24)",
+      "color": "#0A0E1A",
+      "padding": "3px 10px",
+      "borderRadius": "3px",
+      "letterSpacing": "0.06em",
+      "textTransform": "uppercase",
+      "shadow": "none",
+      "rationale": "Hairline outline only, transparent fill. Reads as an editorial marker, not a badge. The mono typeface earns its keep by making tags visually distinct from prose without adding color."
+    },
+    "tagVoltage": {
+      "extends": "tag",
+      "background": "rgba(212,255,61,0.15)",
+      "border": "1px solid rgba(212,255,61,0.60)",
+      "color": "#1A2005",
+      "usage": "Reserved for the highest-authority artifact (Scale Kit) and for hero-level CTAs. Voltage tags should appear no more than twice per page."
+    },
+    "tagInkInverse": {
+      "extends": "tag",
+      "background": "transparent",
+      "border": "1px solid rgba(244,241,234,0.28)",
+      "color": "#F4F1EA",
+      "usage": "On ink backgrounds. Same restraint as the default tag, inverted."
+    },
+    "artifactTag": {
+      "fontFamily": "Söhne Mono",
+      "fontSize": "11px",
+      "fontWeight": 600,
+      "padding": "3px 10px",
+      "borderRadius": "3px",
+      "letterSpacing": "0.06em",
+      "textTransform": "uppercase",
+      "variants": {
+        "DIAGNOSTIC": { "background": "transparent", "color": "#6E7080", "border": "1px solid rgba(110,112,128,0.42)" },
+        "CHARTER": { "background": "transparent", "color": "#0A0E1A", "border": "1px solid rgba(10,14,26,0.36)" },
+        "BRIEF": { "background": "transparent", "color": "#3E4152", "border": "1px solid rgba(62,65,82,0.36)" },
+        "DASHBOARD": { "background": "transparent", "color": "#4E4E48", "border": "1px solid rgba(78,78,72,0.36)" },
+        "PLAYBOOK": { "background": "transparent", "color": "#0A0E1A", "border": "1px solid rgba(10,14,26,0.42)" },
+        "SCALE_KIT": { "background": "rgba(212,255,61,0.15)", "color": "#1A2005", "border": "1px solid rgba(212,255,61,0.60)" }
+      }
+    },
+    "engagementStagePill": {
+      "fontFamily": "Söhne",
+      "fontSize": "12px",
+      "fontWeight": 600,
+      "padding": "6px 14px",
+      "borderRadius": "999px",
+      "letterSpacing": "0.04em",
+      "textTransform": "uppercase",
+      "variants": {
+        "DISCOVERY": { "background": "rgba(138,138,133,0.14)", "color": "#4E4E48", "border": "1px solid rgba(138,138,133,0.36)" },
+        "ARCHITECTURE": { "background": "rgba(138,138,133,0.22)", "color": "#3E4152", "border": "1px solid rgba(138,138,133,0.44)" },
+        "BUILD": { "background": "rgba(10,14,26,0.08)", "color": "#0A0E1A", "border": "1px solid rgba(10,14,26,0.28)" },
+        "RUNTIME": { "background": "#0A0E1A", "color": "#F4F1EA", "border": "1px solid #0A0E1A" },
+        "SYSTEMATIZATION": { "background": "rgba(78,78,72,0.14)", "color": "#4E4E48", "border": "1px solid rgba(78,78,72,0.40)" },
+        "SCALE_READY": { "background": "rgba(212,255,61,0.18)", "color": "#1A2005", "border": "1px solid rgba(212,255,61,0.72)" }
+      },
+      "rationale": "The stage ramp visualizes engagement maturity as a monochromatic progression from soft neutral (Discovery), through ink dominance (Build and Runtime), settling to Systematization gray, and resolving to voltage (Scale-Ready) as the arrival state. Voltage appears only at the destination, which is what makes it feel earned."
+    },
+    "buttonPrimary": {
+      "fontFamily": "Söhne",
+      "fontSize": "15px",
+      "fontWeight": 500,
+      "padding": "14px 28px",
+      "borderRadius": "6px",
+      "textColor": "#F4F1EA",
+      "background": "#0A0E1A",
+      "hoverBackground": "#12162A",
+      "border": "1px solid #0A0E1A",
+      "shadow": "none",
+      "hoverShadow": "0 8px 24px rgba(10,14,26,0.14)",
+      "activeTransform": "translateY(1px)",
+      "rationale": "Solid ink, no gradient, no glow. Ink primary CTA is the default. Hover raises with subtle shadow, active presses down by 1px. Confident and quiet."
+    },
+    "buttonVoltage": {
+      "fontFamily": "Söhne",
+      "fontSize": "15px",
+      "fontWeight": 600,
+      "padding": "14px 28px",
+      "borderRadius": "6px",
+      "textColor": "#1A2005",
+      "background": "#D4FF3D",
+      "hoverBackground": "#E1FF6B",
+      "border": "1px solid #A8CC24",
+      "shadow": "none",
+      "hoverShadow": "0 8px 32px rgba(168,204,36,0.32)",
+      "rationale": "The hero CTA. Voltage background with dark voltage-ink text for contrast. Used for the single most important action on any given page (Start a Diagnostic, Book an Intro Call). Never used for secondary actions. If a page has two Voltage buttons, one of them is wrong."
+    },
+    "buttonGhost": {
+      "fontFamily": "Söhne",
+      "fontSize": "15px",
+      "fontWeight": 500,
+      "padding": "13px 26px",
+      "borderRadius": "6px",
+      "textColor": "#0A0E1A",
+      "background": "transparent",
+      "border": "1px solid rgba(10,14,26,0.24)",
+      "hoverBackground": "rgba(10,14,26,0.04)",
+      "hoverBorderColor": "rgba(10,14,26,0.48)"
+    },
+    "buttonInverseGhost": {
+      "extends": "buttonGhost",
+      "textColor": "#F4F1EA",
+      "border": "1px solid rgba(244,241,234,0.28)",
+      "hoverBackground": "rgba(244,241,234,0.06)",
+      "hoverBorderColor": "rgba(244,241,234,0.60)",
+      "usage": "On ink backgrounds"
+    },
+    "card": {
+      "background": "#EDE9DF",
+      "border": "1px solid rgba(10,14,26,0.08)",
+      "borderRadius": "8px",
+      "padding": "36px",
+      "shadow": "0 1px 2px rgba(10,14,26,0.02), 0 4px 16px rgba(10,14,26,0.04)",
+      "hoverShadow": "0 2px 4px rgba(10,14,26,0.04), 0 12px 32px rgba(10,14,26,0.08)",
+      "hoverTransform": "translateY(-2px)",
+      "transition": "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+      "rationale": "Warm bone card on warm bone ground. Elevation on hover is subtle and slow. No inset highlights, no borders that draw attention. Cards recede until touched."
+    },
+    "cardInk": {
+      "background": "#0A0E1A",
+      "color": "#F4F1EA",
+      "border": "1px solid rgba(244,241,234,0.10)",
+      "borderRadius": "8px",
+      "padding": "36px",
+      "shadow": "0 4px 32px rgba(10,14,26,0.20)",
+      "usage": "For hero pull-quotes, headline statistics, and thesis statements. Inversion is the emphasis mechanism."
+    },
+    "cardVoltage": {
+      "background": "#D4FF3D",
+      "color": "#1A2005",
+      "border": "1px solid #A8CC24",
+      "borderRadius": "8px",
+      "padding": "36px",
+      "shadow": "0 4px 32px rgba(168,204,36,0.18)",
+      "usage": "Reserved for a single card on the entire site. Typically the Scale-Ready invitation or the top CTA card. If two Voltage cards appear on the same page, one is wrong."
+    },
+    "cardOutlined": {
+      "background": "transparent",
+      "border": "1px solid rgba(10,14,26,0.20)",
+      "borderRadius": "8px",
+      "padding": "36px",
+      "hoverBorderColor": "rgba(10,14,26,0.40)",
+      "usage": "Alternative to filled card for secondary information. Reads as more editorial and less commercial."
+    },
+    "calloutFootnote": {
+      "fontFamily": "Söhne",
+      "fontStyle": "italic",
+      "fontSize": "15px",
+      "lineHeight": 1.55,
+      "color": "#3E4152",
+      "borderLeft": "2px solid #D4FF3D",
+      "padding": "4px 20px",
+      "background": "transparent",
+      "rationale": "Voltage rule signals the callout without dominating. Italic sans keeps the register modern rather than editorial-classical."
+    },
+    "blockquote": {
+      "fontFamily": "Söhne",
+      "fontWeight": 400,
+      "fontStyle": "normal",
+      "fontSize": "clamp(24px, 3vw, 36px)",
+      "lineHeight": 1.35,
+      "color": "#0A0E1A",
+      "letterSpacing": "-0.01em",
+      "borderLeft": "none",
+      "padding": "0",
+      "marginY": "48px",
+      "attribution": {
+        "fontFamily": "Söhne",
+        "fontSize": "14px",
+        "fontWeight": 500,
+        "color": "#6E7080",
+        "letterSpacing": "0.04em",
+        "textTransform": "uppercase",
+        "marginTop": "20px"
+      },
+      "rationale": "No border, no quotation marks, no italics. The blockquote is set at display scale and stands on its own weight. Attribution appears below in small-cap secondary text."
+    },
+    "input": {
+      "fontFamily": "Söhne",
+      "fontSize": "16px",
+      "fontWeight": 400,
+      "padding": "14px 16px",
+      "background": "#F8F5EF",
+      "border": "1px solid rgba(10,14,26,0.18)",
+      "borderRadius": "6px",
+      "color": "#0A0E1A",
+      "focusBorderColor": "#0A0E1A",
+      "focusShadow": "0 0 0 3px rgba(212,255,61,0.30)",
+      "placeholderColor": "#8A8A85",
+      "transition": "border-color 0.25s ease, box-shadow 0.25s ease"
+    },
+    "rule": {
+      "thin": "1px solid rgba(10,14,26,0.10)",
+      "mid": "1px solid rgba(10,14,26,0.20)",
+      "strong": "1px solid rgba(10,14,26,0.36)",
+      "voltage": "1px solid rgba(212,255,61,0.60)",
+      "onDark": "1px solid rgba(244,241,234,0.14)",
+      "usage": "Hairline rules are the primary structural separator across the site. Voltage rules are used sparingly, typically to underline a hero headline or a key CTA."
+    }
+  },
+  "signatureMotion": {
+    "heroMoment": {
+      "name": "Emergent Order",
+      "concept": "A canvas-based particle system that visualizes the firm's actual work: the transition from disorder to structured pattern. A field of 200 to 400 small particles begins in Brownian chaos, then gradually self-organizes into a structured pattern (a grid, a spiral, a wave, a logical graph), holds the pattern briefly, dissolves back into chaos, and reorganizes into a different pattern. Cycles roughly every 15 to 20 seconds.",
+      "purpose": "Communicates the substance of what NextWave does. Every client engagement is a version of this: taking a messy business process and organizing it into a durable system. The animation is the thesis in visual form.",
+      "renderingApproach": "Canvas 2D with requestAnimationFrame, not WebGL. Chosen for performance, mobile compatibility, and load time. WebGL adds weight and battery cost that the marginal visual quality does not justify.",
+      "particleSpec": {
+        "count": "200 to 400 (adaptive based on viewport size)",
+        "size": "1.5px to 3px",
+        "baseColor": "#F4F1EA at 0.6 opacity",
+        "organizingColor": "#D4FF3D at 0.9 opacity (particles that have found their target position)",
+        "backgroundContext": "Ink (#0A0E1A) field, may include subtle radial gradient toward inkDeep at edges"
+      },
+      "motionSpec": {
+        "chaosPhase": "Brownian random walk, 6 to 8 seconds",
+        "organizingPhase": "Particles ease toward target positions over 3 to 4 seconds with staggered start times. Voltage color activates as each particle reaches its target.",
+        "holdPhase": "Pattern holds for 2 to 3 seconds. Subtle breathing scale (0.98 to 1.02).",
+        "dissolvePhase": "Particles ease back to chaos over 2 to 3 seconds. Voltage color fades to bone as particles leave their positions.",
+        "easing": "cubic-bezier(0.16, 1, 0.3, 1) throughout"
+      },
+      "patternLibrary": [
+        "Grid (rectangular lattice)",
+        "Radial (concentric rings)",
+        "Wave (sine curves at varied frequencies)",
+        "Directed graph (nodes and lightly-drawn edges)",
+        "Vertical bars (histogram-like)",
+        "Diagonal cascade"
+      ],
+      "performanceRequirements": {
+        "targetFPS": "60fps on M-series MacBook, 30fps minimum on mid-range Android",
+        "loadWeight": "Total JS budget for this component: under 20KB gzipped",
+        "reducedMotion": "Respect prefers-reduced-motion: replace with a single static pattern at 40% opacity"
+      },
+      "placement": "Hero section only. Never repeated elsewhere on the site."
+    },
+    "textReveal": {
+      "concept": "Headlines and eyebrow labels reveal on scroll with a subtle staggered fade-and-rise",
+      "spec": {
+        "elementDelay": "60ms between adjacent elements",
+        "duration": "800ms",
+        "easing": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "translateY": "20px start, 0 end",
+        "opacity": "0 start, 1 end"
+      },
+      "constraint": "Body text does not animate. Only headlines, eyebrow labels, and hero elements. Animating body text feels overproduced and slows reading."
+    },
+    "sectionTransitions": {
+      "concept": "Major page sections reveal with a subtle mask-based transition rather than a crossfade",
+      "spec": {
+        "duration": "1200ms",
+        "easing": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "mask": "Vertical mask that sweeps from top edge, revealing content beneath"
+      }
+    },
+    "microInteractions": {
+      "buttonHover": "0.25s ease-out for shadow and background, 0.15s ease-out for text color",
+      "linkHover": "Underline slides in from left over 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+      "cardHover": "0.6s cubic-bezier(0.16, 1, 0.3, 1) for transform and shadow",
+      "inputFocus": "0.25s ease for border and focus ring"
+    }
+  },
+  "effects": {
+    "surface": "Warm bone ground (#F4F1EA) is the default. Ink sections (#0A0E1A) are used for high-emphasis moments (hero, thesis statement, final CTA). Voltage never appears as a background surface for more than a single card or button.",
+    "elevation": {
+      "rest": "0 1px 2px rgba(10,14,26,0.02), 0 4px 12px rgba(10,14,26,0.04)",
+      "raised": "0 2px 4px rgba(10,14,26,0.04), 0 12px 32px rgba(10,14,26,0.08)",
+      "hero": "0 4px 32px rgba(10,14,26,0.20)",
+      "voltage": "0 8px 32px rgba(168,204,36,0.24)"
+    },
+    "noGlow": "Electric glows and neon halos are explicitly banned. They read as sci-fi cliché and undercut the peer-level positioning. Depth is communicated through soft ink shadows only.",
+    "noGradient": "Decorative color gradients are banned. Structural gradients (subtle radial in ink hero backgrounds, mask reveals on scroll transitions) are permitted."
+  },
+  "layoutAndMotion": {
+    "spacingSystem": "8px base, with large section-level rhythm (128px, 192px between major sections on desktop)",
+    "container": {
+      "maxWidthPrimary": "1200px",
+      "maxWidthReading": "680px",
+      "maxWidthDisplay": "1440px",
+      "horizontalPadding": "px-8 mobile, px-12 tablet, px-16 desktop",
+      "rationale": "Reading widths are narrow (long-form pages sit at 680px). Display widths are wide (hero and stat sections stretch to 1440px). The contrast between narrow reading and wide display creates the editorial rhythm."
+    },
+    "surfaceStyle": "Hairline rules, generous whitespace, and section-level rhythm are the primary structural devices. No decorative shapes, no illustration for illustration's sake.",
+    "transitions": {
+      "standard": {
+        "duration": "0.6s",
+        "timingFunction": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "appliesTo": "Card elevations, section reveals, most component transitions"
+      },
+      "slow": {
+        "duration": "1.2s",
+        "timingFunction": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "appliesTo": "Hero moments, major page transitions, section mask reveals"
+      },
+      "fast": {
+        "duration": "0.25s",
+        "timingFunction": "ease-out",
+        "appliesTo": "Button hovers, input focus, link states"
+      },
+      "philosophy": "Confidence moves slowly. Snappy motion reads as anxious. When in doubt, use the standard 0.6s. If it feels slightly too slow, it is probably right."
+    },
+    "reducedMotion": "All non-essential animations respect prefers-reduced-motion. The signature Emergent Order particle system replaces with a single static pattern. Section reveals become instant."
+  },
+  "semanticUsage": {
+    "primaryText": "inkPrimary",
+    "secondaryText": "inkSecondary",
+    "tertiaryText": "inkTertiary",
+    "primarySurface": "bgBone",
+    "cardSurface": "bgBoneWarm",
+    "heroSurface": "bgInk",
+    "signatureAccent": {
+      "token": "voltagePrimary",
+      "domain": "The single color that carries the brand's personality. Used for: primary CTAs on hero sections, the Scale-Ready stage indicator, one hero-moment highlight per page, the Emergent Order signature animation. Voltage should appear no more than three times per page. Its scarcity is what makes it read as intentional rather than decorative."
+    },
+    "structuralNeutral": {
+      "token": "signalPrimary",
+      "domain": "Rules, secondary text, structural elements, mid-stage engagement indicators. The connective tissue of the layout."
+    },
+    "engagementLifecycle": {
+      "1_discovery": "stageDiscovery",
+      "2_architecture": "stageArchitecture",
+      "3_build": "stageBuild",
+      "4_runtime": "stageRuntime",
+      "5_systematization": "stageSystematization",
+      "6_scale_ready": "stageScaleReady",
+      "rationale": "The lifecycle is a monochromatic progression from soft neutral through ink dominance to voltage arrival. Voltage appears only at the destination state. This visualizes engagement maturity as a journey toward a specific, valuable, and rare end state."
+    },
+    "artifactTaxonomy": {
+      "diagnostic": "artifactDiagnostic: the diagnostic instrument (Diagnostic replaces the Ironwood 'Audit' terminology; same function, more modern register)",
+      "charter": "artifactCharter: the foundational agreement (Engagement Charter, scope and terms)",
+      "brief": "artifactBrief: the build specification (System Brief)",
+      "dashboard": "artifactDashboard: the ongoing measurement instrument (recovered revenue, KPIs, uptime)",
+      "playbook": "artifactPlaybook: the systematized operating process",
+      "scaleKit": "artifactScaleKit: the replicable, transferable package. The only voltage-colored artifact. The firm's highest-authority output."
+    }
+  },
+  "voiceAndTone": {
+    "register": "Confident forward motion. Aspiration, never fear. Plain-spoken about capability, credible about limitation. Skeptical of hype while embodying modernity. The firm that has seen through the AI marketing noise and is quietly building the substantive version. Cadence is modern but not clipped, direct but not curt. Says less rather than more. Trusts the reader to keep up.",
+    "avoid": [
+      "Hype language ('revolutionary', 'game-changing', 'cutting-edge', 'next-generation', 'unleash', 'transform' as a verb)",
+      "AI-vendor speak ('AI-powered everything', 'harness the power of AI', 'AI-driven')",
+      "Fear-based framing ('or get left behind', 'don't miss the wave', 'the future is now')",
+      "Vague futurism ('the future of work', 'reimagining X for the digital age')",
+      "Em dashes. Use periods, colons, semicolons, or parentheses",
+      "Emoji in client-facing artifacts",
+      "The eleven AI-tell patterns catalogued in the Project Instructions ('Here's what,' 'It's not X it's Y,' 'Moreover,' 'It's worth noting that,' etc.)",
+      "Adversarial framing toward competitors or previous eras. The firm is confident enough not to need enemies."
+    ],
+    "embrace": [
+      "Specific numbers ('recovered $47,200 for a Jonesboro roofer in Q3')",
+      "Concrete verbs ('we build', 'we run', 'we hand off')",
+      "Forward-looking claims tied to specific action ('running quietly in the background of businesses that are pulling ahead')",
+      "Named processes and artifacts spoken matter-of-factly",
+      "Honest acknowledgment when an agent is the wrong tool for the job",
+      "Peer-level tone. The firm addresses sophisticated buyers as equals and Jonesboro business owners as neighbors. Same voice, adjusted register."
+    ],
+    "sampleLines": [
+      "We build the systems that will be running your business in five years. And we start next month.",
+      "Serious AI, built locally, running quietly in the background of businesses that are pulling ahead.",
+      "The tools that used to only exist in San Francisco. Now built in Jonesboro, for wherever you are.",
+      "We measure what you are losing before we propose anything.",
+      "One considered system per engagement. Handed off to run without us. Ready to scale when you are."
+    ]
+  },
+  "designPrinciples": [
+    {
+      "principle": "Modern by restraint, not by ornament",
+      "implication": "Every visual decision biases toward removal. Whitespace, hairline rules, and single-family typography carry the modern register. Gradients, glows, decorative shapes, and holographic effects are banned. The firm's confidence is expressed through what is not on the page."
+    },
+    {
+      "principle": "Motion that means something",
+      "implication": "Every animation communicates something specific. Section reveals signal hierarchy. The Emergent Order particle system communicates the firm's actual work. Micro-interactions provide feedback. Motion for its own sake is banned."
+    },
+    {
+      "principle": "One signature, not many",
+      "implication": "One color carries the personality (Voltage). One 3D moment carries the visual signature (Emergent Order). One typeface family carries the hierarchy (Söhne). Discipline in singular choices reads as intentional; multiplicity reads as unsure."
+    },
+    {
+      "principle": "Aspiration, never fear",
+      "implication": "The firm sells forward motion, not the avoidance of being left behind. Every piece of copy and every visual decision should make the reader want to build with us, not worry about what happens if they do not."
+    },
+    {
+      "principle": "Peer-level, always",
+      "implication": "The brand addresses a Jonesboro business owner and a coastal AI executive as equals. Not by dumbing down for one or performing sophistication for the other. Same voice, adjusted register. The dual-audience test is passed by treating both audiences as capable."
+    },
+    {
+      "principle": "Distinct from the AI-vendor category",
+      "implication": "Warm bone, near-black ink, and confident chartreuse are chosen precisely to sit outside the electric-blue and purple-gradient territory occupied by every other AI firm. NextWave should be unmistakable for any other AI-adjacent property. If the brand starts looking like the category, the strategy has failed."
+    }
+  ]
+}

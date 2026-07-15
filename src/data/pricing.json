@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Foundation",
+    "tag": "STARTER",
+    "tagVariant": "default",
+    "price": "$1,500",
+    "cadence": "setup + $500/mo",
+    "description": "One core automation. A single missed-revenue leak patched. Voice answering or follow-up sequence. Includes Diagnostic, Charter, and Dashboard.",
+    "features": [
+      "AI voice agent or follow-up sequence (one system)",
+      "Live performance dashboard",
+      "30-day monitoring and tuning",
+      "Diagnostic and Charter artifacts"
+    ],
+    "cta": "Start a Diagnostic",
+    "ctaVariant": "primary",
+    "highlighted": false
+  },
+  {
+    "name": "Growth",
+    "tag": "MOST POPULAR",
+    "tagVariant": "voltage",
+    "price": "$4,500",
+    "cadence": "setup + $1,200/mo",
+    "description": "Voice answering, follow-up, and intake automation running together. Includes full artifact suite through Playbook.",
+    "features": [
+      "AI voice agent",
+      "Lead follow-up sequences",
+      "Client intake automation",
+      "Live dashboard",
+      "60-day monitoring",
+      "Full artifact suite through Playbook"
+    ],
+    "cta": "Start a Diagnostic",
+    "ctaVariant": "primary",
+    "highlighted": true
+  },
+  {
+    "name": "Authority",
+    "tag": "SCALE KIT",
+    "tagVariant": "default",
+    "price": "Custom",
+    "cadence": "engagement-based",
+    "description": "Full-stack automation architecture for operators ready to systematize and replicate. Includes Scale Kit artifact.",
+    "features": [
+      "Complete automation stack",
+      "Systematization and documentation",
+      "Team training and handoff",
+      "Scale Kit artifact",
+      "Multi-location readiness"
+    ],
+    "cta": "Book a Strategy Call",
+    "ctaVariant": "ghost",
+    "highlighted": false
+  }
+]

@@ -1,0 +1,267 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import FinalCTA from '../components/sections/FinalCTA.astro';
+import Card from '../components/ui/Card.astro';
+import Tag from '../components/ui/Tag.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+---
+
+<BaseLayout
+  title="About — NextWave AI Solutions"
+  description="We're an AI automation firm built in Jonesboro, AR. Local operators, serious systems, straight answers."
+>
+  <Header />
+  <main>
+
+    <!-- A1: Hero -->
+    <section class="about-hero">
+      <div class="container">
+        <Tag variant="inverse">Who we are</Tag>
+        <h1 class="hero-headline" data-reveal data-reveal-delay="60">Built here. Built for this.</h1>
+        <p class="hero-subhead" data-reveal data-reveal-delay="120">We are not a software company that discovered local business. We are operators who built the system we wished existed.</p>
+      </div>
+    </section>
+
+    <!-- A2: Origin -->
+    <section class="origin-section">
+      <div class="container">
+        <SectionHeader
+          eyebrow="The story"
+          headline="Why Jonesboro."
+          align="center"
+        />
+        <div class="reading-column">
+          <p>Most AI firms are built in cities, for cities, and priced for companies that can absorb the overhead. We built NextWave AI Solutions because local service businesses in mid-size markets are the ones getting left behind, not for lack of need, but for lack of access.</p>
+          <p>Jonesboro has plumbers, roofers, HVAC contractors, and med spas running on the same broken intake loop: phone rings, voicemail picks up, lead goes cold. We fix that loop. We do it here, with operators we can sit across from, and we build it to run without us in the room.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- A3: Team -->
+    <section class="team-section">
+      <div class="container">
+        <SectionHeader
+          eyebrow="The team"
+          headline="Two builders. One system."
+          align="center"
+        />
+        <div class="team-grid" data-reveal data-reveal-delay="60">
+          <Card variant="default" class="team-card">
+            <Tag variant="default">Architecture + Systems</Tag>
+            <h3 class="team-name">Luis 'Nano' Espinoza</h3>
+            <p class="team-bio">The person clients call when they want to understand the numbers, think out loud about growth, and hear what the data says and what comes next.</p>
+            <p class="team-location">Jonesboro, AR</p>
+          </Card>
+          <Card variant="default" class="team-card">
+            <Tag variant="default">Sales + Relationships</Tag>
+            <h3 class="team-name">Jeremy Terrell</h3>
+            <p class="team-bio">The person local operators actually talk to. Handles discovery, scopes the engagement, and stays in the relationship. Knows the market, knows the people.</p>
+            <p class="team-location">Jonesboro, AR</p>
+          </Card>
+          <Card variant="default" class="team-card">
+            <Tag variant="default">Operations + Tech</Tag>
+            <h3 class="team-name">Mason Clark</h3>
+            <p class="team-bio">The person clients turn to when something breaks, when they want to expand, and when they want to know exactly what the system is doing and what comes next.</p>
+            <p class="team-location">Jonesboro, AR</p>
+          </Card>
+        </div>
+      </div>
+    </section>
+
+    <!-- A4: Values -->
+    <section class="values-section">
+      <div class="container">
+        <SectionHeader
+          eyebrow="How we work"
+          headline="The things we won't negotiate on."
+          align="center"
+        />
+        <div class="values-grid" data-reveal data-reveal-delay="60">
+          <Card variant="default">
+            <Tag variant="default">DIAGNOSTIC FIRST</Tag>
+            <h3 class="values-headline">We measure before we propose.</h3>
+            <p class="values-body">Every engagement starts with a Diagnostic. We identify what you are losing before we ask for anything. If we cannot find recoverable revenue, we say so.</p>
+          </Card>
+          <!-- <Card variant="default">
+            <Tag variant="default">YOU OWN IT</Tag>
+            <h3 class="values-headline">The system belongs to you.</h3>
+            <p class="values-body">Every integration, every playbook, every artifact we produce is yours. We build for your independence. The engagement ends. The system stays.</p>
+          </Card> -->
+          <Card variant="default">
+            <Tag variant="default">PLAIN TERMS</Tag>
+            <h3 class="values-headline">No jargon, no upsell loop.</h3>
+            <p class="values-body">We explain every decision in plain language. We scope what is needed. We do not add complexity to justify a higher retainer.</p>
+          </Card>
+        </div>
+      </div>
+    </section>
+
+    <!-- A5: Final CTA -->
+    <FinalCTA />
+
+  </main>
+  <Footer />
+
+  <script>
+    import { initScrollReveal } from '../lib/scrollReveal';
+    initScrollReveal();
+  </script>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* Hero */
+  .about-hero {
+    background: var(--bg-ink);
+    padding: 160px 0 96px;
+  }
+
+  .hero-headline {
+    font-family: var(--font-sans);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: var(--ink-on-dark);
+    margin: 24px 0 20px;
+  }
+
+  .hero-subhead {
+    font-family: var(--font-sans);
+    font-size: clamp(1.0625rem, 1.5vw, 1.1875rem);
+    line-height: 1.65;
+    color: var(--ink-on-dark-dim);
+    max-width: 560px;
+    margin: 0;
+  }
+
+  /* Origin */
+  .origin-section {
+    background: var(--bg-bone);
+    padding: 96px 0;
+  }
+
+  .reading-column {
+    max-width: var(--max-width-reading);
+    margin: 0 auto;
+  }
+
+  .reading-column p {
+    font-family: var(--font-sans);
+    font-size: clamp(1.0625rem, 1.5vw, 1.125rem);
+    line-height: 1.75;
+    color: var(--ink-secondary);
+    margin: 0 0 1.5em;
+  }
+
+  .reading-column p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Team */
+  .team-section {
+    background: var(--bg-bone-warm);
+    padding: 96px 0;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .team-name {
+    font-family: var(--font-sans);
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--ink-primary);
+    margin: 14px 0 10px;
+    line-height: 1.3;
+  }
+
+  .team-bio {
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--ink-secondary);
+    margin: 0 0 16px;
+  }
+
+  .team-location {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    color: var(--ink-tertiary);
+    margin: 0;
+  }
+
+  /* Values */
+  .values-section {
+    background: var(--bg-bone);
+    padding: 96px 0;
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .values-headline {
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    font-weight: 500;
+    color: var(--ink-primary);
+    margin: 14px 0 10px;
+    line-height: 1.3;
+  }
+
+  .values-body {
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--ink-secondary);
+    margin: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .container {
+      padding: 0 20px;
+    }
+
+    .about-hero {
+      padding: 120px 0 72px;
+    }
+
+    .team-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .values-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .origin-section,
+    .team-section,
+    .values-section {
+      padding: 72px 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .about-hero {
+      padding: 100px 0 60px;
+    }
+
+    .hero-headline {
+      font-size: 2rem;
+    }
+  }
+</style>

@@ -1,0 +1,2 @@
+# Redirect www to apex (configure apex in Cloudflare DNS)
+https://www.nextwaveaisolutions.com/* https://nextwaveaisolutions.com/:splat 301

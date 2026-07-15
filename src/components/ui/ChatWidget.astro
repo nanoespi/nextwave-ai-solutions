@@ -1,0 +1,422 @@
+---
+---
+
+<div class="chat-widget" id="chat-widget">
+  <!-- Trigger button -->
+  <button
+    class="chat-trigger"
+    id="chat-trigger"
+    aria-label="Open chat"
+    aria-expanded="false"
+    aria-controls="chat-panel"
+  >
+    <!-- Message circle icon -->
+    <svg class="chat-trigger__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+  </button>
+
+  <!-- Chat panel -->
+  <div
+    class="chat-panel"
+    id="chat-panel"
+    role="dialog"
+    aria-label="Chat with NextWave AI"
+    aria-hidden="true"
+  >
+    <div class="chat-panel__header">
+      <div class="chat-panel__title-group">
+        <span class="chat-panel__name">NextWave AI</span>
+        <span class="chat-panel__subtitle">Ask us anything</span>
+      </div>
+      <button class="chat-close" id="chat-close" aria-label="Close chat">
+        <!-- X icon -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="chat-messages" id="chat-messages" role="log" aria-live="polite" aria-label="Chat messages">
+    </div>
+
+    <div class="chat-input-row">
+      <input
+        class="chat-input"
+        id="chat-input"
+        type="text"
+        placeholder="Type a message..."
+        aria-label="Message"
+        autocomplete="off"
+      />
+      <button class="chat-send" id="chat-send" aria-label="Send message">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Widget container */
+  .chat-widget {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+  }
+
+  /* Trigger button */
+  .chat-trigger {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--voltage);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--voltage-ink);
+    transition: transform var(--dur-fast) ease-out, box-shadow var(--dur-fast) ease-out;
+    box-shadow: var(--shadow-raised);
+    flex-shrink: 0;
+  }
+
+  .chat-trigger:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 32px rgba(168, 204, 36, 0.24);
+  }
+
+  .chat-trigger:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(212, 255, 61, 0.30);
+  }
+
+  /* Chat panel */
+  .chat-panel {
+    width: 360px;
+    max-height: 520px;
+    background: var(--bg-ink);
+    border: 1px solid var(--rule-on-dark-strong);
+    border-radius: 12px;
+    box-shadow: var(--shadow-hero);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+    pointer-events: none;
+    transition: opacity var(--dur-fast) var(--ease-brand),
+                transform var(--dur-fast) var(--ease-brand);
+  }
+
+  .chat-panel--open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+
+  /* Panel header */
+  .chat-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 16px 14px;
+    border-bottom: 1px solid var(--rule-on-dark);
+    flex-shrink: 0;
+  }
+
+  .chat-panel__title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .chat-panel__name {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink-on-dark);
+  }
+
+  .chat-panel__subtitle {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--ink-on-dark-soft);
+  }
+
+  .chat-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--ink-on-dark-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border-radius: 4px;
+    transition: color var(--dur-fast) ease-out;
+  }
+
+  .chat-close:hover {
+    color: var(--ink-on-dark);
+  }
+
+  .chat-close:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(212, 255, 61, 0.30);
+  }
+
+  /* Message area */
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--rule-on-dark) transparent;
+  }
+
+  /* Bubbles injected by JS */
+  :global(.chat-bubble) {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.55;
+    padding: 10px 14px;
+    border-radius: 8px;
+    max-width: 88%;
+    word-break: break-word;
+  }
+
+  :global(.chat-bubble--bot) {
+    background: var(--bg-ink-soft);
+    color: var(--ink-on-dark);
+    border-radius: 8px 8px 8px 2px;
+    align-self: flex-start;
+  }
+
+  :global(.chat-bubble--user) {
+    background: var(--voltage-dim);
+    border: 1px solid var(--rule-voltage);
+    color: var(--ink-primary);
+    border-radius: 8px 8px 2px 8px;
+    align-self: flex-end;
+  }
+
+  :global(.chat-bubble a) {
+    color: var(--voltage);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* Input row */
+  .chat-input-row {
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px 14px;
+    border-top: 1px solid var(--rule-on-dark);
+    flex-shrink: 0;
+  }
+
+  .chat-input {
+    flex: 1;
+    background: var(--bg-ink-soft);
+    border: 1px solid var(--rule-on-dark);
+    border-radius: 6px;
+    padding: 9px 14px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--ink-on-dark);
+    outline: none;
+    transition: border-color var(--dur-fast) ease-out;
+  }
+
+  .chat-input::placeholder {
+    color: var(--ink-on-dark-soft);
+  }
+
+  .chat-input:focus {
+    border-color: rgba(212, 255, 61, 0.40);
+    box-shadow: 0 0 0 3px rgba(212, 255, 61, 0.10);
+  }
+
+  .chat-send {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    background: var(--voltage);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--voltage-ink);
+    flex-shrink: 0;
+    transition: background-color var(--dur-fast) ease-out;
+  }
+
+  .chat-send:hover {
+    background: var(--voltage-bright);
+  }
+
+  .chat-send:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(212, 255, 61, 0.30);
+  }
+
+  /* Full-screen on mobile */
+  @media (max-width: 480px) {
+    .chat-widget {
+      bottom: 16px;
+      right: 16px;
+    }
+
+    .chat-panel {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      max-height: 100%;
+      border-radius: 0;
+      border: none;
+    }
+  }
+</style>
+
+<script>
+import { trackEvent } from '../../lib/analytics';
+
+const CAL_LINK = import.meta.env.PUBLIC_CAL_LINK;
+
+(function () {
+  const trigger = document.getElementById('chat-trigger');
+  const panel = document.getElementById('chat-panel');
+  const closeBtn = document.getElementById('chat-close');
+  const messages = document.getElementById('chat-messages');
+  const input = document.getElementById('chat-input') as HTMLInputElement | null;
+  const sendBtn = document.getElementById('chat-send');
+
+  if (!trigger || !panel || !closeBtn || !messages || !input || !sendBtn) return;
+
+  let greeted = false;
+
+  function openPanel(): void {
+    panel!.classList.add('chat-panel--open');
+    panel!.setAttribute('aria-hidden', 'false');
+    trigger!.setAttribute('aria-expanded', 'true');
+    input!.focus();
+    trackEvent('Chat Widget Opened');
+
+    if (!greeted) {
+      greeted = true;
+      setTimeout(() => addBubble('bot', 'Hi. What\'s costing you the most right now?'), 200);
+    }
+  }
+
+  function closePanel(): void {
+    panel!.classList.remove('chat-panel--open');
+    panel!.setAttribute('aria-hidden', 'true');
+    trigger!.setAttribute('aria-expanded', 'false');
+    trigger!.focus();
+  }
+
+  function addBubble(type: 'bot' | 'user', html: string): void {
+    const bubble = document.createElement('div');
+    bubble.className = `chat-bubble chat-bubble--${type}`;
+    bubble.innerHTML = html;
+    messages!.appendChild(bubble);
+    messages!.scrollTop = messages!.scrollHeight;
+  }
+
+  const RESPONSES: { pattern: RegExp; reply: string }[] = [
+    {
+      pattern: /missed call|voicemail|phone|answer|lead/i,
+      reply: 'Our AI voice agent answers every call, qualifies the lead, and books the appointment. Most clients stop missing leads in the first week.',
+    },
+    {
+      pattern: /pric|cost|how much|fee|rate|money/i,
+      reply: 'Foundation starts at $1,500 setup plus $500/mo. The Growth system (voice + follow-up + intake) is $4,500 setup plus $1,200/mo. The Diagnostic itself costs nothing.',
+    },
+    {
+      pattern: /how.*(work|does|it)|process|step|stage/i,
+      reply: 'We run a free Diagnostic first, then build a Charter you approve before anything is built. Most systems are live within two to three weeks of signing.',
+    },
+    {
+      pattern: /diagnos|free|start|begin/i,
+      reply: 'The Diagnostic is free and takes about 20 minutes. We measure what you are losing before we propose anything.',
+    },
+    {
+      pattern: /cancel|contract|lock|own/i,
+      reply: 'You own everything we build. No lock-in. If you cancel, you keep the playbook, integrations, and system.',
+    },
+    {
+      pattern: /jonesboro|location|where|local|ar|arkansas/i,
+      reply: 'We are based in Jonesboro, AR. We work with local service businesses anywhere, but we prioritize operators we can meet in person.',
+    },
+  ];
+
+  function getBotReply(text: string): string {
+    for (const { pattern, reply } of RESPONSES) {
+      if (pattern.test(text)) return reply;
+    }
+    return 'Good question. Let\'s talk it through on a call. <a href="#contact" class="chat-cal-link">Book a Diagnostic Call</a>';
+  }
+
+  function handleSend(): void {
+    const text = input!.value.trim();
+    if (!text) return;
+    addBubble('user', escapeHtml(text));
+    input!.value = '';
+    setTimeout(() => addBubble('bot', getBotReply(text)), 600);
+  }
+
+  function escapeHtml(str: string): string {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  trigger.addEventListener('click', () => {
+    const isOpen = panel.classList.contains('chat-panel--open');
+    isOpen ? closePanel() : openPanel();
+  });
+
+  closeBtn.addEventListener('click', closePanel);
+
+  sendBtn.addEventListener('click', handleSend);
+
+  input.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  });
+
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key === 'Escape' && panel.classList.contains('chat-panel--open')) {
+      closePanel();
+    }
+  });
+
+  messages.addEventListener('click', (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (target.tagName === 'A' && target.classList.contains('chat-cal-link')) {
+      e.preventDefault();
+      if ((window as any).Cal && CAL_LINK) {
+        (window as any).Cal('modal', { calLink: CAL_LINK });
+      }
+    }
+  });
+})();
+</script>

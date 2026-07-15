@@ -1,0 +1,117 @@
+---
+import Card from '../ui/Card.astro';
+import Tag from '../ui/Tag.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import testimonialsData from '../../data/testimonials.json';
+
+interface Testimonial {
+  quote: string;
+  name: string;
+  title: string;
+  company: string;
+  industry: string;
+}
+
+const testimonials = testimonialsData as Testimonial[];
+---
+
+<section class="testimonials" id="results">
+  <div class="testimonials__inner">
+    <div class="testimonials__eyebrow" data-reveal>
+      <Tag variant="inverse">Results</Tag>
+    </div>
+
+    <SectionHeader
+      headline="What local operators are saying."
+      align="left"
+      onDark={true}
+    />
+
+    <div class="testimonials__grid">
+      {testimonials.map((t, i) => (
+        <Card variant="ink" class="testimonial-card" data-reveal data-reveal-delay={String(i * 60)}>
+          <blockquote class="testimonial-quote">
+            <p class="testimonial-quote__text">{t.quote}</p>
+          </blockquote>
+          <footer class="testimonial-attribution">
+            <span class="testimonial-attribution__name">{t.name}</span>
+            <span class="testimonial-attribution__meta">{t.title}, {t.company}</span>
+          </footer>
+        </Card>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials {
+    background: var(--bg-ink);
+    padding: 100px 32px;
+  }
+
+  .testimonials__inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .testimonials__eyebrow {
+    margin-bottom: 24px;
+  }
+
+  .testimonials__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  /* Blockquote */
+  .testimonial-quote {
+    margin: 0 0 24px;
+    padding: 0;
+  }
+
+  .testimonial-quote__text {
+    font-family: var(--font-sans);
+    font-size: clamp(18px, 1.5vw, 22px);
+    font-weight: 400;
+    color: var(--ink-on-dark);
+    line-height: 1.5;
+    margin: 0;
+    font-style: italic;
+  }
+
+  /* Attribution */
+  .testimonial-attribution {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule-on-dark);
+  }
+
+  .testimonial-attribution__name {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-on-dark);
+  }
+
+  .testimonial-attribution__meta {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--ink-on-dark-soft);
+  }
+
+  @media (max-width: 900px) {
+    .testimonials__grid {
+      grid-template-columns: 1fr;
+      max-width: 560px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .testimonials {
+      padding: 72px 20px;
+    }
+  }
+</style>

@@ -1,0 +1,90 @@
+---
+import Card from '../ui/Card.astro';
+import Tag from '../ui/Tag.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import featuresData from '../../data/features.json';
+
+type TagVariant = 'default' | 'voltage' | 'inverse' | 'artifact';
+
+interface Feature {
+  tag: string;
+  tagVariant: TagVariant;
+  headline: string;
+  body: string;
+}
+
+const features = featuresData as Feature[];
+---
+
+<section class="features" id="services">
+  <div class="features__inner">
+    <SectionHeader
+      eyebrow="What We Build"
+      headline="Systems that run without you in the room."
+      align="left"
+    />
+
+    <div class="features__grid">
+      {features.map((feature, i) => (
+        <Card variant="default" class="feature-card" data-reveal data-reveal-delay={String((i % 3) * 60)}>
+          <Tag variant={feature.tagVariant}>{feature.tag}</Tag>
+          <h3 class="feature-card__headline">{feature.headline}</h3>
+          <p class="feature-card__body">{feature.body}</p>
+        </Card>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .features {
+    background: var(--bg-bone);
+    padding: 100px 32px;
+  }
+
+  .features__inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .features__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .feature-card__headline {
+    font-family: var(--font-sans);
+    font-size: clamp(18px, 1.5vw, 22px);
+    font-weight: 500;
+    color: var(--ink-primary);
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+    margin: 20px 0 12px;
+  }
+
+  .feature-card__body {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink-secondary);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    .features__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .features {
+      padding: 72px 20px;
+    }
+
+    .features__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

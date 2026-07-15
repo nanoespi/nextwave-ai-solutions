@@ -1,0 +1,95 @@
+---
+type ArtifactType = 'DIAGNOSTIC' | 'CHARTER' | 'BRIEF' | 'DASHBOARD' | 'PLAYBOOK' | 'SCALE_KIT';
+
+interface Props {
+  variant?: 'default' | 'voltage' | 'inverse' | 'artifact';
+  artifactType?: ArtifactType;
+  class?: string;
+}
+
+const { variant = 'default', artifactType, class: className } = Astro.props;
+
+const artifactStyles: Record<ArtifactType, { color: string; border: string; background: string }> = {
+  DIAGNOSTIC: {
+    background: 'transparent',
+    color: '#6E7080',
+    border: '1px solid rgba(110,112,128,0.42)',
+  },
+  CHARTER: {
+    background: 'transparent',
+    color: '#0A0E1A',
+    border: '1px solid rgba(10,14,26,0.36)',
+  },
+  BRIEF: {
+    background: 'transparent',
+    color: '#3E4152',
+    border: '1px solid rgba(62,65,82,0.36)',
+  },
+  DASHBOARD: {
+    background: 'transparent',
+    color: '#4E4E48',
+    border: '1px solid rgba(78,78,72,0.36)',
+  },
+  PLAYBOOK: {
+    background: 'transparent',
+    color: '#0A0E1A',
+    border: '1px solid rgba(10,14,26,0.42)',
+  },
+  SCALE_KIT: {
+    background: 'rgba(212,255,61,0.15)',
+    color: '#1A2005',
+    border: '1px solid rgba(212,255,61,0.60)',
+  },
+};
+
+const artifactStyle = variant === 'artifact' && artifactType ? artifactStyles[artifactType] : null;
+---
+
+<span
+  class:list={['tag', `tag--${variant}`, className]}
+  style={artifactStyle
+    ? `color: ${artifactStyle.color}; border: ${artifactStyle.border}; background: ${artifactStyle.background};`
+    : undefined}
+>
+  <slot />
+</span>
+
+<style>
+  .tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 3px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.6;
+  }
+
+  /* Default: hairline outline */
+  .tag--default {
+    background: transparent;
+    border: 1px solid rgba(10, 14, 26, 0.24);
+    color: var(--ink-primary);
+  }
+
+  /* Voltage */
+  .tag--voltage {
+    background: rgba(212, 255, 61, 0.15);
+    border: 1px solid rgba(212, 255, 61, 0.60);
+    color: var(--voltage-ink);
+  }
+
+  /* Inverse (on ink backgrounds) */
+  .tag--inverse {
+    background: transparent;
+    border: 1px solid rgba(244, 241, 234, 0.28);
+    color: var(--ink-on-dark);
+  }
+
+  /* Artifact: styles applied inline per type */
+  .tag--artifact {
+    font-weight: 600;
+  }
+</style>

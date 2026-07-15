@@ -1,0 +1,38 @@
+[
+  {
+    "tag": "LEAD RECOVERY",
+    "tagVariant": "default",
+    "headline": "No more missed calls.",
+    "body": "An AI voice agent answers every call, qualifies the lead, and books the appointment. Your phone rings. We handle the rest."
+  },
+  {
+    "tag": "FOLLOW-UP",
+    "tagVariant": "default",
+    "headline": "Every lead followed up. Automatically.",
+    "body": "Sequences that go out in minutes, not days. Text, email, or both. Stops when they respond."
+  },
+  {
+    "tag": "INTAKE",
+    "tagVariant": "default",
+    "headline": "Onboarding that runs itself.",
+    "body": "New clients get a structured intake flow from the moment they book. No back-and-forth, no missed paperwork."
+  },
+  {
+    "tag": "REPORTING",
+    "tagVariant": "default",
+    "headline": "Know your numbers without pulling a report.",
+    "body": "A live dashboard shows recovered revenue, response rates, and system uptime. Built for owners, not analysts."
+  },
+  {
+    "tag": "SYSTEMATIZATION",
+    "tagVariant": "default",
+    "headline": "Processes that don't depend on you.",
+    "body": "We document, automate, and hand off. The system runs. Your team executes against a playbook."
+  },
+  {
+    "tag": "SCALE KIT",
+    "tagVariant": "voltage",
+    "headline": "Ready to grow when you are.",
+    "body": "Every engagement ends with a transferable package. Add a location, hire a team, or pass it to a new operator. Built to replicate."
+  }
+]

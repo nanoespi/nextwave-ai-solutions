@@ -1,0 +1,204 @@
+---
+import SectionHeader from '../ui/SectionHeader.astro';
+import faqData from '../../data/faq.json';
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+const items = faqData as FAQItem[];
+---
+
+<section class="faq" id="faq">
+  <div class="faq__inner">
+    <SectionHeader
+      eyebrow="FAQ"
+      headline="Questions we actually get asked."
+      align="left"
+    />
+
+    <div class="faq__list" role="list">
+      {items.map((item, i) => (
+        <div class="faq-item" role="listitem" data-faq-item>
+          <button
+            class="faq-item__trigger"
+            aria-expanded="false"
+            aria-controls={`faq-answer-${i}`}
+            id={`faq-question-${i}`}
+          >
+            <span class="faq-item__question">{item.question}</span>
+            <span class="faq-item__icon" aria-hidden="true">
+              <!-- Plus icon -->
+              <svg class="icon-plus" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              <!-- Minus icon -->
+              <svg class="icon-minus" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </span>
+          </button>
+
+          <div
+            class="faq-item__body"
+            id={`faq-answer-${i}`}
+            role="region"
+            aria-labelledby={`faq-question-${i}`}
+          >
+            <div class="faq-item__body-inner">
+              <p class="faq-item__answer">{item.answer}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    background: var(--bg-bone-warm);
+    padding: 100px 32px;
+  }
+
+  .faq__inner {
+    max-width: var(--max-width-reading);
+    margin: 0 auto;
+  }
+
+  .faq__list {
+    border-top: 1px solid var(--rule-hairline);
+  }
+
+  /* Item */
+  .faq-item {
+    border-bottom: 1px solid var(--rule-hairline);
+  }
+
+  /* Trigger button */
+  .faq-item__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 24px 0;
+    text-align: left;
+    color: var(--ink-primary);
+  }
+
+  .faq-item__trigger:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(212, 255, 61, 0.30);
+    border-radius: 4px;
+  }
+
+  .faq-item__question {
+    font-family: var(--font-sans);
+    font-size: clamp(16px, 1.2vw, 18px);
+    font-weight: 500;
+    color: var(--ink-primary);
+    line-height: 1.4;
+  }
+
+  /* Icon: only one visible at a time */
+  .faq-item__icon {
+    flex-shrink: 0;
+    color: var(--ink-tertiary);
+    transition: color var(--dur-fast) ease-out;
+    position: relative;
+    width: 20px;
+    height: 20px;
+  }
+
+  .icon-plus,
+  .icon-minus {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity var(--dur-fast) ease-out, transform var(--dur-fast) ease-out;
+  }
+
+  .icon-minus {
+    opacity: 0;
+  }
+
+  /* Open state */
+  .faq-item--open .icon-plus {
+    opacity: 0;
+    transform: rotate(90deg);
+  }
+
+  .faq-item--open .icon-minus {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+
+  .faq-item--open .faq-item__trigger {
+    color: var(--ink-primary);
+  }
+
+  /* Collapsible body using grid trick for smooth height animation */
+  .faq-item__body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s ease;
+    overflow: hidden;
+  }
+
+  .faq-item--open .faq-item__body {
+    grid-template-rows: 1fr;
+  }
+
+  .faq-item__body-inner {
+    overflow: hidden;
+  }
+
+  .faq-item__answer {
+    font-family: var(--font-sans);
+    font-size: clamp(15px, 1.1vw, 17px);
+    color: var(--ink-secondary);
+    line-height: 1.7;
+    margin: 0;
+    padding-bottom: 24px;
+  }
+
+  @media (max-width: 600px) {
+    .faq {
+      padding: 72px 20px;
+    }
+  }
+</style>
+
+<script>
+(function () {
+  const items = document.querySelectorAll<HTMLElement>('[data-faq-item]');
+
+  function closeAll(): void {
+    items.forEach((item) => {
+      item.classList.remove('faq-item--open');
+      const trigger = item.querySelector<HTMLButtonElement>('.faq-item__trigger');
+      if (trigger) trigger.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  items.forEach((item) => {
+    const trigger = item.querySelector<HTMLButtonElement>('.faq-item__trigger');
+    if (!trigger) return;
+
+    trigger.addEventListener('click', () => {
+      const isOpen = item.classList.contains('faq-item--open');
+      closeAll();
+      if (!isOpen) {
+        item.classList.add('faq-item--open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+})();
+</script>

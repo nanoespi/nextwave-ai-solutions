@@ -1,0 +1,23 @@
+[
+  {
+    "quote": "We were losing 30% of our after-hours calls to voicemail. That stopped in week one. The system paid for itself in the first month.",
+    "name": "M. Thompson",
+    "title": "Owner",
+    "company": "Thompson HVAC",
+    "industry": "HVAC"
+  },
+  {
+    "quote": "I handed it off to my front desk. They follow the playbook. I stopped worrying about follow-up entirely.",
+    "name": "R. Castillo",
+    "title": "Owner",
+    "company": "Castillo Plumbing",
+    "industry": "Plumbing"
+  },
+  {
+    "quote": "No sales pitch, no fluff. They showed me what I was losing before they asked for anything. That was enough.",
+    "name": "D. Warren",
+    "title": "Owner",
+    "company": "Warren Roofing",
+    "industry": "Roofing"
+  }
+]

@@ -1,0 +1,122 @@
+---
+interface Props {
+  variant?: 'primary' | 'voltage' | 'ghost' | 'inverse-ghost';
+  href?: string;
+  size?: 'sm' | 'md';
+  class?: string;
+  'aria-label'?: string;
+  [key: string]: unknown;
+}
+
+const {
+  variant = 'primary',
+  href,
+  size = 'md',
+  class: className,
+  'aria-label': ariaLabel,
+  ...rest
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag
+  href={href}
+  aria-label={ariaLabel}
+  class:list={['btn', `btn--${variant}`, `btn--${size}`, className]}
+  {...rest}
+>
+  <slot />
+</Tag>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color var(--dur-fast) ease-out,
+                box-shadow var(--dur-fast) ease-out,
+                border-color var(--dur-fast) ease-out,
+                color 0.15s ease-out,
+                transform 0.1s ease-out;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(212, 255, 61, 0.30);
+  }
+
+  /* Sizes */
+  .btn--md {
+    padding: 14px 28px;
+  }
+
+  .btn--sm {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+
+  /* Primary (ink) */
+  .btn--primary {
+    background: var(--bg-ink);
+    color: var(--ink-on-dark);
+    border: 1px solid var(--bg-ink);
+    box-shadow: none;
+  }
+
+  .btn--primary:hover {
+    background: var(--bg-ink-soft);
+    box-shadow: 0 8px 24px rgba(10, 14, 26, 0.14);
+  }
+
+  .btn--primary:active {
+    transform: translateY(1px);
+  }
+
+  /* Voltage */
+  .btn--voltage {
+    background: var(--voltage);
+    color: var(--voltage-ink);
+    border: 1px solid var(--voltage-deep);
+    font-weight: 600;
+    box-shadow: none;
+  }
+
+  .btn--voltage:hover {
+    background: var(--voltage-bright);
+    box-shadow: 0 8px 32px rgba(168, 204, 36, 0.32);
+  }
+
+  /* Ghost */
+  .btn--ghost {
+    background: transparent;
+    color: var(--ink-primary);
+    border: 1px solid rgba(10, 14, 26, 0.24);
+  }
+
+  .btn--ghost:hover {
+    background: rgba(10, 14, 26, 0.04);
+    border-color: rgba(10, 14, 26, 0.48);
+  }
+
+  /* Inverse ghost (on ink backgrounds) */
+  .btn--inverse-ghost {
+    background: transparent;
+    color: var(--ink-on-dark);
+    border: 1px solid rgba(244, 241, 234, 0.28);
+  }
+
+  .btn--inverse-ghost:hover {
+    background: rgba(244, 241, 234, 0.06);
+    border-color: rgba(244, 241, 234, 0.60);
+  }
+</style>

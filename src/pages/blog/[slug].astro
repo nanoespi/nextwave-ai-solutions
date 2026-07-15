@@ -1,0 +1,161 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Tag from '../../components/ui/Tag.astro';
+import '../../styles/prose.css';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const calLink = import.meta.env.PUBLIC_CAL_LINK ?? 'nextwave-ai/diagnostic';
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+---
+
+<BaseLayout
+  title={`${post.data.title} — NextWave AI Solutions`}
+  description={post.data.description}
+>
+  <Header />
+  <main class="post-main">
+    <div class="post-container">
+
+      <!-- Post header -->
+      <header class="post-header">
+        <div class="post-tags">
+          {post.data.tags.map((tag) => (
+            <Tag variant="default">{tag}</Tag>
+          ))}
+        </div>
+        <h1 class="post-title">{post.data.title}</h1>
+        <p class="post-description">{post.data.description}</p>
+        <p class="post-byline">By {post.data.author}, {formatDate(post.data.publishDate)}</p>
+        <hr class="post-rule" />
+      </header>
+
+      <!-- Post body -->
+      <article class="prose">
+        <Content />
+      </article>
+
+      <!-- End rule + CTA footnote -->
+      <hr class="post-rule" />
+      <p class="post-footnote">
+        Want to talk through what this means for your business?{' '}
+        <button
+          class="footnote-cta"
+          data-cal-link={calLink}
+          data-cal-config='{"layout":"modal"}'
+        >Book a free Diagnostic Call.</button>
+      </p>
+
+    </div>
+  </main>
+  <Footer />
+
+  <script>
+    import { initScrollReveal } from '../../lib/scrollReveal';
+    initScrollReveal();
+  </script>
+</BaseLayout>
+
+<style>
+  .post-main {
+    background: var(--bg-bone);
+    padding: 120px 32px 96px;
+  }
+
+  .post-container {
+    max-width: var(--max-width-reading);
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .post-header {
+    margin-bottom: 0;
+  }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding-top: 8px;
+  }
+
+  .post-title {
+    font-family: var(--font-sans);
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--ink-primary);
+    margin: 0 0 16px;
+  }
+
+  .post-description {
+    font-family: var(--font-sans);
+    font-size: clamp(1.0625rem, 1.5vw, 1.125rem);
+    line-height: 1.65;
+    color: var(--ink-secondary);
+    margin: 0 0 16px;
+  }
+
+  .post-byline {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    color: var(--ink-tertiary);
+    margin: 0;
+  }
+
+  .post-rule {
+    border: none;
+    border-top: 1px solid var(--rule-hairline);
+    margin: 32px 0;
+  }
+
+  /* Footnote CTA */
+  .post-footnote {
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--ink-secondary);
+    margin: 0;
+  }
+
+  .footnote-cta {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: var(--font-sans);
+    font-size: inherit;
+    color: var(--ink-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    transition: color var(--dur-fast) var(--ease-brand);
+  }
+
+  .footnote-cta:hover {
+    color: var(--voltage-deep);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .post-main {
+      padding: 100px 20px 72px;
+    }
+  }
+</style>

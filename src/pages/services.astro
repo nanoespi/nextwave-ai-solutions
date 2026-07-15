@@ -1,0 +1,425 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import FinalCTA from '../components/sections/FinalCTA.astro';
+import Button from '../components/ui/Button.astro';
+import Tag from '../components/ui/Tag.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+
+const calLink = import.meta.env.PUBLIC_CAL_LINK;
+
+const services = [
+  {
+    tag: 'LEAD RECOVERY',
+    tagVariant: 'default' as const,
+    headline: 'AI Voice Agent',
+    body1: 'An AI voice agent answers every inbound call, qualifies the lead against your criteria, and books the appointment directly into your calendar. After-hours, weekends, high-volume days. It does not miss a call.',
+    body2: 'Most local service businesses lose between 20 and 40 percent of inbound leads to voicemail or slow response. The voice agent closes that gap in the first week.',
+    whatYouGet: [
+      '24/7 inbound call coverage',
+      'Lead qualification against your criteria',
+      'Direct calendar booking',
+      'Call summary and transcript per lead',
+    ],
+    visualVoltage: false,
+  },
+  {
+    tag: 'FOLLOW-UP',
+    tagVariant: 'default' as const,
+    headline: 'Automated Follow-Up Sequences',
+    body1: 'Sequences that go out in minutes, not days. Text, email, or both. Triggered the moment a lead comes in, stopped the moment they respond. No lead sits cold.',
+    body2: 'The follow-up sequence is calibrated to your average sales cycle. A roofing estimate follow-up runs differently from an HVAC maintenance reminder. We build it to match.',
+    whatYouGet: [
+      'Multi-channel sequences (SMS + email)',
+      'Trigger-based automation (no manual send)',
+      'Auto-stop on response',
+      'Response rate reporting',
+    ],
+    visualVoltage: false,
+  },
+  {
+    tag: 'INTAKE',
+    tagVariant: 'default' as const,
+    headline: 'Client Intake Automation',
+    body1: 'New clients get a structured intake flow from the moment they book. Forms, documents, pre-appointment instructions, delivered automatically, completed before arrival.',
+    body2: 'No back-and-forth. No missed paperwork. No front desk chasing signatures the morning of the appointment.',
+    whatYouGet: [
+      'Automated intake form delivery',
+      'Document collection and storage',
+      'Pre-appointment instruction sequences',
+      'Completion confirmation to your team',
+    ],
+    visualVoltage: false,
+  },
+  {
+    tag: 'REPORTING',
+    tagVariant: 'default' as const,
+    headline: 'Live Performance Dashboard',
+    body1: 'A dashboard built for owners, not analysts. Recovered revenue, response rates, call volume, sequence performance, visible at a glance, updated in real time.',
+    body2: 'We set it up against your baseline in the first week. You know within 30 days exactly what the system recovered.',
+    whatYouGet: [
+      'Real-time revenue recovery tracking',
+      'Lead response rate metrics',
+      'System uptime and performance indicators',
+      'Monthly summary delivered to your inbox',
+    ],
+    visualVoltage: false,
+  },
+  {
+    tag: 'SYSTEMATIZATION',
+    tagVariant: 'default' as const,
+    headline: 'Process Documentation + Playbook',
+    body1: 'We document every decision tree, integration, and workflow the system runs on. Your team gets a Playbook. The system runs without us in the room.',
+    body2: 'This is the deliverable that makes everything transferable. New hire, new location, new operator. The Playbook makes the system replicable.',
+    whatYouGet: [
+      'Full process documentation',
+      'Team training and handoff',
+      'Decision tree maps',
+      'Playbook artifact (yours to keep)',
+    ],
+    visualVoltage: false,
+  },
+  {
+    tag: 'SCALE KIT',
+    tagVariant: 'voltage' as const,
+    headline: 'Scale Kit',
+    body1: 'The final deliverable of an Authority engagement. Every integration documented, every automation packaged, every process mapped for replication. One new location, one new hire, one new operator.',
+    body2: 'The Scale Kit is not a report. It is a transfer of operational infrastructure.',
+    whatYouGet: [
+      'Complete automation stack documentation',
+      'Multi-location readiness assessment',
+      'Operator handoff package',
+      'Replication checklist',
+    ],
+    visualVoltage: true,
+  },
+];
+---
+
+<BaseLayout
+  title="Services — NextWave AI Solutions"
+  description="AI automation systems for local service businesses. Voice agents, follow-up sequences, intake automation, and more."
+>
+  <Header />
+  <main>
+
+    <!-- B1: Hero -->
+    <section class="services-hero">
+      <div class="container">
+        <Tag variant="inverse">What we build</Tag>
+        <h1 class="hero-headline" data-reveal data-reveal-delay="60">Six systems. One outcome.</h1>
+        <p class="hero-subhead" data-reveal data-reveal-delay="120">Every engagement is scoped to the specific leak. These are the systems we build most.</p>
+      </div>
+    </section>
+
+    <!-- B2: Services Detail -->
+    <section class="services-detail">
+      <div class="container">
+        {services.map((service, index) => (
+          <div class:list={['service-row', { 'service-row--reverse': index % 2 === 1 }]} data-reveal>
+            <div class:list={['service-visual', { 'service-visual--voltage': service.visualVoltage }]}>
+              <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect width="400" height="300" rx="8" fill="var(--signal-dim)" />
+              </svg>
+            </div>
+            <div class="service-content">
+              <Tag variant={service.tagVariant}>{service.tag}</Tag>
+              <h3 class="service-headline">{service.headline}</h3>
+              <p class="service-body">{service.body1}</p>
+              <p class="service-body">{service.body2}</p>
+              <ul class="service-list">
+                {service.whatYouGet.map((item) => <li>{item}</li>)}
+              </ul>
+              <Button
+                variant="ghost"
+                data-cal-link={calLink}
+                data-cal-config='{"layout":"modal"}'
+              >Start with a Diagnostic &#x2192;</Button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- B3: Engagement Overview -->
+    <section class="engagement-section">
+      <div class="container">
+        <div class="engagement-inner">
+          <SectionHeader
+            eyebrow="How it's scoped"
+            headline="Every engagement starts with a Diagnostic."
+            align="center"
+          />
+          <p class="engagement-body" data-reveal data-reveal-delay="120">We do not propose a system until we know what you are losing. The Diagnostic is free, takes less than 48 hours, and ends with a straight answer: here is the leak, here is what it costs you, here is what a system would recover.</p>
+          <div class="engagement-cta" data-reveal data-reveal-delay="180">
+            <Button
+              variant="voltage"
+              data-cal-link={calLink}
+              data-cal-config='{"layout":"modal"}'
+            >Book a Free Diagnostic</Button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- B4: Pricing Callout -->
+    <section class="pricing-callout">
+      <div class="container">
+        <div class="pricing-inner">
+          <h3 class="pricing-headline" data-reveal>Pricing starts at $1,500 setup + $500/mo.</h3>
+          <p class="pricing-body" data-reveal data-reveal-delay="60">Three tiers based on scope. All engagements include a Diagnostic and a Charter before any build work begins.</p>
+          <a href="/#pricing" class="pricing-link" data-reveal data-reveal-delay="120">See full pricing &#x2192;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- B5: Final CTA -->
+    <FinalCTA />
+
+  </main>
+  <Footer />
+
+  <script>
+    import { initScrollReveal } from '../lib/scrollReveal';
+    initScrollReveal();
+  </script>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* Hero */
+  .services-hero {
+    background: var(--bg-ink);
+    padding: 160px 0 96px;
+  }
+
+  .hero-headline {
+    font-family: var(--font-sans);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: var(--ink-on-dark);
+    margin: 24px 0 20px;
+  }
+
+  .hero-subhead {
+    font-family: var(--font-sans);
+    font-size: clamp(1.0625rem, 1.5vw, 1.1875rem);
+    line-height: 1.65;
+    color: var(--ink-on-dark-dim);
+    max-width: 560px;
+    margin: 0;
+  }
+
+  /* Services Detail */
+  .services-detail {
+    background: var(--bg-bone);
+    padding: 96px 0;
+  }
+
+  .service-row {
+    display: flex;
+    align-items: center;
+    gap: 64px;
+    padding: 64px 0;
+    border-bottom: 1px solid var(--rule-hairline);
+  }
+
+  .service-row:first-child {
+    padding-top: 0;
+  }
+
+  .service-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .service-row--reverse {
+    flex-direction: row-reverse;
+  }
+
+  /* Visual placeholder */
+  .service-visual {
+    flex: 0 0 42%;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .service-visual svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .service-visual--voltage {
+    border: 1px solid var(--voltage);
+    border-radius: 8px;
+  }
+
+  /* Service content */
+  .service-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .service-headline {
+    font-family: var(--font-sans);
+    font-size: clamp(1.25rem, 2vw, 1.625rem);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    color: var(--ink-primary);
+    margin: 14px 0 16px;
+    line-height: 1.25;
+  }
+
+  .service-body {
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--ink-secondary);
+    margin: 0 0 1em;
+  }
+
+  .service-body:last-of-type {
+    margin-bottom: 20px;
+  }
+
+  /* What you get list */
+  .service-list {
+    list-style: none;
+    margin: 0 0 28px;
+    padding: 0;
+    border-left: 2px solid var(--rule-mid);
+    padding-left: 20px;
+  }
+
+  .service-list li {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--ink-secondary);
+    margin-bottom: 6px;
+  }
+
+  .service-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Engagement Overview */
+  .engagement-section {
+    background: var(--bg-bone-warm);
+    padding: 96px 0;
+  }
+
+  .engagement-inner {
+    max-width: var(--max-width-reading);
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .engagement-body {
+    font-family: var(--font-sans);
+    font-size: clamp(1.0625rem, 1.5vw, 1.125rem);
+    line-height: 1.75;
+    color: var(--ink-secondary);
+    margin: 0 0 36px;
+  }
+
+  .engagement-cta {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Pricing Callout */
+  .pricing-callout {
+    background: var(--bg-bone);
+    padding: 72px 0;
+  }
+
+  .pricing-inner {
+    max-width: var(--max-width-reading);
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .pricing-headline {
+    font-family: var(--font-sans);
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    color: var(--ink-primary);
+    margin: 0 0 12px;
+  }
+
+  .pricing-body {
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--ink-secondary);
+    margin: 0 0 16px;
+  }
+
+  .pricing-link {
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    color: var(--ink-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color var(--dur-fast) var(--ease-brand);
+  }
+
+  .pricing-link:hover {
+    color: var(--voltage-deep);
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .service-row,
+    .service-row--reverse {
+      flex-direction: column;
+      gap: 36px;
+      padding: 48px 0;
+    }
+
+    .service-visual {
+      flex: none;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      padding: 0 20px;
+    }
+
+    .services-hero {
+      padding: 120px 0 72px;
+    }
+
+    .services-detail,
+    .engagement-section {
+      padding: 72px 0;
+    }
+
+    .pricing-callout {
+      padding: 56px 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .services-hero {
+      padding: 100px 0 60px;
+    }
+
+    .hero-headline {
+      font-size: 2rem;
+    }
+  }
+</style>

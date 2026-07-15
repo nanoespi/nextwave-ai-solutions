@@ -1,0 +1,81 @@
+---
+interface Props {
+  eyebrow?: string;
+  headline: string;
+  subhead?: string;
+  align?: 'left' | 'center';
+  onDark?: boolean;
+}
+
+const { eyebrow, headline, subhead, align = 'left', onDark = false } = Astro.props;
+---
+
+<div class:list={['section-header', `section-header--${align}`, { 'section-header--dark': onDark }]}>
+  {eyebrow && (
+    <p class="section-header__eyebrow" data-reveal data-reveal-delay="0">
+      {eyebrow}
+    </p>
+  )}
+  <h2 class="section-header__headline" data-reveal data-reveal-delay="60">
+    {headline}
+  </h2>
+  {subhead && (
+    <p class="section-header__subhead" data-reveal data-reveal-delay="120">
+      {subhead}
+    </p>
+  )}
+</div>
+
+<style>
+  .section-header {
+    margin-bottom: 56px;
+  }
+
+  .section-header--center {
+    text-align: center;
+  }
+
+  /* Eyebrow */
+  .section-header__eyebrow {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-tertiary);
+    margin: 0 0 16px;
+  }
+
+  .section-header--dark .section-header__eyebrow {
+    color: var(--ink-on-dark-soft);
+  }
+
+  /* Headline */
+  .section-header__headline {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(28px, 3.5vw, 48px);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--ink-primary);
+    margin: 0 0 24px;
+  }
+
+  .section-header--dark .section-header__headline {
+    color: var(--ink-on-dark);
+  }
+
+  /* Subhead */
+  .section-header__subhead {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: clamp(17px, 1.5vw, 19px);
+    line-height: 1.65;
+    color: var(--ink-secondary);
+    margin: 0;
+  }
+
+  .section-header--dark .section-header__subhead {
+    color: var(--ink-on-dark-dim);
+  }
+</style>

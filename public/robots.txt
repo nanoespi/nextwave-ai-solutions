@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nextwaveaisolutions.com/sitemap-index.xml

@@ -1,0 +1,201 @@
+---
+import SectionHeader from '../ui/SectionHeader.astro';
+import Tag from '../ui/Tag.astro';
+
+type StageKey = 'DISCOVERY' | 'ARCHITECTURE' | 'BUILD' | 'RUNTIME' | 'SYSTEMATIZATION' | 'SCALE_READY';
+type ArtifactType = 'DIAGNOSTIC' | 'CHARTER' | 'BRIEF' | 'DASHBOARD' | 'PLAYBOOK' | 'SCALE_KIT';
+
+interface Stage {
+  number: string;
+  key: StageKey;
+  name: string;
+  description: string;
+  artifact: ArtifactType;
+}
+
+const stages: Stage[] = [
+  {
+    number: '01',
+    key: 'DISCOVERY',
+    name: 'Discovery',
+    description: 'We audit your incoming lead flow, identify where revenue is leaking, and document what you actually want the system to do.',
+    artifact: 'DIAGNOSTIC',
+  },
+  {
+    number: '02',
+    key: 'ARCHITECTURE',
+    name: 'Architecture',
+    description: 'We map the system before we build it. You approve the scope, timeline, and terms before any work begins.',
+    artifact: 'CHARTER',
+  },
+  {
+    number: '03',
+    key: 'BUILD',
+    name: 'Build',
+    description: 'We build and integrate the automation stack. You see it running in a staging environment before it touches a live lead.',
+    artifact: 'BRIEF',
+  },
+  {
+    number: '04',
+    key: 'RUNTIME',
+    name: 'Runtime',
+    description: 'The system goes live. We monitor performance, tune responses, and track recovered revenue against your baseline.',
+    artifact: 'DASHBOARD',
+  },
+  {
+    number: '05',
+    key: 'SYSTEMATIZATION',
+    name: 'Systematization',
+    description: 'We document every process, decision tree, and integration. Your team gets a playbook. The system runs without us in the room.',
+    artifact: 'PLAYBOOK',
+  },
+  {
+    number: '06',
+    key: 'SCALE_READY',
+    name: 'Scale Ready',
+    description: 'The engagement closes with a transferable package. One new location, one new hire, one new operator. The system replicates.',
+    artifact: 'SCALE_KIT',
+  },
+];
+
+const pillStyles: Record<StageKey, string> = {
+  DISCOVERY:      'background:rgba(138,138,133,0.14);color:#4E4E48;border:1px solid rgba(138,138,133,0.36);',
+  ARCHITECTURE:   'background:rgba(138,138,133,0.22);color:#3E4152;border:1px solid rgba(138,138,133,0.44);',
+  BUILD:          'background:rgba(10,14,26,0.08);color:#0A0E1A;border:1px solid rgba(10,14,26,0.28);',
+  RUNTIME:        'background:#0A0E1A;color:#F4F1EA;border:1px solid #0A0E1A;',
+  SYSTEMATIZATION:'background:rgba(78,78,72,0.14);color:#4E4E48;border:1px solid rgba(78,78,72,0.40);',
+  SCALE_READY:    'background:rgba(212,255,61,0.18);color:#1A2005;border:1px solid rgba(212,255,61,0.72);',
+};
+---
+
+<section class="how-it-works" id="how-it-works">
+  <div class="how-it-works__inner">
+    <SectionHeader
+      eyebrow="The Process"
+      headline="Six stages. One outcome: a system that runs."
+      align="left"
+    />
+
+    <div class="stages-wrap">
+      <div class="stages-ramp" aria-hidden="true"></div>
+      <div class="stages-scroll" role="list">
+        {stages.map((stage) => (
+          <div class="stage-card" role="listitem">
+            <span class="stage-number">{stage.number}</span>
+            <span class="stage-pill" style={pillStyles[stage.key]}>{stage.name}</span>
+            <p class="stage-desc">{stage.description}</p>
+            <div class="stage-artifact">
+              <Tag variant="artifact" artifactType={stage.artifact}>{stage.artifact.replace('_', ' ')}</Tag>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .how-it-works {
+    background: var(--bg-bone-warm);
+    padding: 100px 32px;
+  }
+
+  .how-it-works__inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  /* Scroll container */
+  .stages-wrap {
+    position: relative;
+  }
+
+  /* Gradient ramp bar */
+  .stages-ramp {
+    height: 3px;
+    width: 100%;
+    background: linear-gradient(
+      90deg,
+      rgba(138,138,133,0.35) 0%,
+      rgba(138,138,133,0.60) 22%,
+      rgba(10,14,26,0.75) 45%,
+      #0A0E1A 65%,
+      #4E4E48 82%,
+      #D4FF3D 100%
+    );
+    border-radius: 2px;
+    margin-bottom: 24px;
+  }
+
+  .stages-scroll {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+  }
+
+  /* Stage card */
+  .stage-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 20px 0 0;
+  }
+
+  .stage-number {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-tertiary);
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .stage-pill {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+    white-space: nowrap;
+  }
+
+  .stage-desc {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--ink-secondary);
+    line-height: 1.65;
+    margin: 0 0 16px;
+    flex: 1;
+  }
+
+  .stage-artifact {
+    margin-top: auto;
+  }
+
+  /* Mobile: horizontal scroll */
+  @media (max-width: 900px) {
+    .stages-scroll {
+      grid-template-columns: repeat(6, 220px);
+      overflow-x: auto;
+      padding-bottom: 16px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--signal-dim) transparent;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .how-it-works {
+      padding: 72px 20px;
+    }
+
+    .stages-scroll {
+      grid-template-columns: repeat(6, 180px);
+    }
+  }
+</style>

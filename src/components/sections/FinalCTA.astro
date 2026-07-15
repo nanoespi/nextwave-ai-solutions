@@ -1,0 +1,100 @@
+---
+import Button from '../ui/Button.astro';
+import Tag from '../ui/Tag.astro';
+
+const calLink = import.meta.env.PUBLIC_CAL_LINK;
+---
+
+<section class="final-cta" id="contact">
+  <div class="final-cta__inner">
+    <div class="final-cta__eyebrow" data-reveal>
+      <Tag variant="inverse">Ready to start</Tag>
+    </div>
+
+    <h2 class="final-cta__headline" data-reveal data-reveal-delay="60">
+      The Diagnostic is free. The delay is not.
+    </h2>
+
+    <p class="final-cta__subhead" data-reveal data-reveal-delay="120">
+      We measure what you are losing before we propose anything. Book a 20-minute call and we will tell you exactly what a system would recover for your business.
+    </p>
+
+    <div class="final-cta__action" data-reveal data-reveal-delay="180">
+      <Button variant="voltage" class="final-cta__btn" data-cal-link={calLink} data-cal-config='{"layout":"modal"}' data-track="CTA Clicked">
+        Book a Free Diagnostic Call
+      </Button>
+    </div>
+
+    <div class="final-cta__footnote" data-reveal data-reveal-delay="240">
+      <p class="footnote-text">No pitch. No retainer. A diagnostic instrument and a straight answer.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .final-cta {
+    background: var(--bg-ink);
+    padding: 120px 32px;
+  }
+
+  .final-cta__inner {
+    max-width: var(--max-width-reading);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .final-cta__eyebrow {
+    margin-bottom: 28px;
+  }
+
+  .final-cta__headline {
+    font-family: var(--font-sans);
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 500;
+    color: var(--ink-on-dark);
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    margin: 0 0 24px;
+  }
+
+  .final-cta__subhead {
+    font-family: var(--font-sans);
+    font-size: clamp(17px, 1.5vw, 19px);
+    color: var(--ink-on-dark-dim);
+    line-height: 1.65;
+    margin: 0 0 40px;
+  }
+
+  .final-cta__action {
+    margin-bottom: 28px;
+  }
+
+  /* Callout footnote with voltage left border */
+  .final-cta__footnote {
+    border-left: 2px solid rgba(212, 255, 61, 0.40);
+    padding-left: 16px;
+  }
+
+  .footnote-text {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--ink-on-dark-soft);
+    line-height: 1.55;
+    margin: 0;
+    font-style: italic;
+  }
+
+  @media (max-width: 600px) {
+    .final-cta {
+      padding: 80px 20px;
+    }
+
+    .final-cta__btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
