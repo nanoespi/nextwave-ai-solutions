@@ -23,3 +23,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# all .md files except README.md
+*.md
+!README.md
