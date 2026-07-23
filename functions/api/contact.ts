@@ -43,7 +43,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'NextWave AI Website <noreply@nextwaveaisolutions.com>',
+        from: 'Naerix Website <noreply@nextwaveaisolutions.com>',
         to: [context.env.CONTACT_EMAIL],
         reply_to: payload.email,
         subject: `New message from ${payload.name} - ${payload.businessName}`,

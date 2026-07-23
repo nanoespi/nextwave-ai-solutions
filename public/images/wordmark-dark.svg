@@ -1,9 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 52" role="img" width="260" height="52">
-  <title>NextWave AI Solutions</title>
-  <desc>NextWave AI Solutions wordmark for dark/ink surfaces</desc>
+  <title>Naerix</title>
+  <desc>Naerix wordmark for dark/ink surfaces</desc>
+  <style>
+    @font-face {
+      font-family: 'Xolonium Bold Free';
+      src: url('/fonts/Xolonium-Bold.ttf') format('truetype');
+      font-style: normal;
+      font-weight: 700;
+    }
+  </style>
   <circle cx="4" cy="8" r="3" fill="#D4FF3D"/>
   <text
-    font-family="'General Sans', 'Inter', system-ui, sans-serif"
-    font-size="20" font-weight="500" letter-spacing="-0.005em"
-    fill="#F4F1EA" y="36">NextWave<tspan fill="rgba(244,241,234,0.42)"> AI Solutions</tspan></text>
+    font-family="'Xolonium Bold Free', 'Xolonium', 'Sora', 'General Sans', 'Inter', system-ui, sans-serif"
+    font-size="20" font-weight="700" letter-spacing="-0.005em"
+    fill="#F4F1EA" y="36">Naerix</text>
 </svg>

@@ -1,6 +1,6 @@
 {
   "brandDocumentationVersion": "1.0.0",
-  "product": "NextWave AI Solutions - Brand Design",
+  "product": "Naerix - Brand Design",
   "theme": {
     "name": "The Near Frontier",
     "description": "A modernist identity for a serious AI firm that has already seen where things are going and is calmly building. The brand reads as unmistakably contemporary without performing the future: warm-bone surfaces, near-black ink for gravitas, and a single confident chartreuse accent (Voltage) that carries the entire personality. Motion is present throughout but choreographed rather than decorative. One signature 3D moment (an emergent-order particle system) carries the visual signature. Everything else is craft-grade typography, generous whitespace, and cinematically slow transitions. The reference bar is Linear, Vercel, Anthropic, and Instrument for craft; Pentagram for editorial confidence. Deliberately outside the AI-vendor visual bucket (no electric blue, no purple, no holographic gradients, no HUD tropes). The dual-audience test the brand must pass: a Jonesboro business owner reads it as 'serious operation, real people' and a sophisticated coastal buyer reads it as 'peer-level, they know where the frontier is.' Both audiences read the same site as serious. That is the only signal that scales from Jonesboro to national."
@@ -64,9 +64,9 @@
   },
   "typography": {
     "fontFamilies": {
-      "primary": ["Söhne", "General Sans", "Inter", "system-ui", "sans-serif"],
-      "mono": ["Söhne Mono", "JetBrains Mono", "ui-monospace", "monospace"],
-      "notes": "Single-family discipline. Söhne (Klim Type Foundry, licensed) throughout, with General Sans (Indian Type Foundry, free) as the primary fallback for early-stage budgets. Serif fallback is intentionally absent: the brand's editorial confidence comes from typographic hierarchy in a single family, not from serif/sans contrast."
+      "primary": ["Inter", "system-ui", "sans-serif"],
+      "mono": ["JetBrains Mono", "ui-monospace", "monospace"],
+      "notes": "Inter is the primary UI and body family. Xolonium Bold Free is reserved for major display headlines and logo/brand marks. Serif fallback is intentionally absent: hierarchy is controlled through scale, spacing, and weight."
     },
     "weights": {
       "regular": 400,
@@ -76,7 +76,7 @@
     },
     "scales": {
       "displayHero": {
-        "fontFamily": "Söhne",
+        "fontFamily": "Xolonium Bold Free",
         "fontWeight": 500,
         "fontSize": "clamp(56px, 8vw, 112px)",
         "lineHeight": 1.02,
@@ -84,28 +84,28 @@
         "rationale": "Large, spare, and set at medium weight rather than bold. Contemporary serious-tech register signals confidence through scale and restraint rather than through weight. Reference: Linear and Vercel display type."
       },
       "h1": {
-        "fontFamily": "Söhne",
+        "fontFamily": "Xolonium Bold Free",
         "fontWeight": 500,
         "fontSize": "clamp(40px, 5vw, 72px)",
         "lineHeight": 1.06,
         "letterSpacing": "-0.02em"
       },
       "h2": {
-        "fontFamily": "Söhne",
+        "fontFamily": "Xolonium Bold Free",
         "fontWeight": 500,
         "fontSize": "clamp(28px, 3.5vw, 48px)",
         "lineHeight": 1.15,
         "letterSpacing": "-0.015em"
       },
       "h3": {
-        "fontFamily": "Söhne",
+        "fontFamily": "Xolonium Bold Free",
         "fontWeight": 500,
         "fontSize": "24px-32px",
         "lineHeight": 1.25,
         "letterSpacing": "-0.01em"
       },
       "labelSmall": {
-        "fontFamily": "Söhne",
+        "fontFamily": "Inter",
         "fontWeight": 600,
         "fontSize": "12px-13px",
         "letterSpacing": "0.12em",
@@ -113,34 +113,34 @@
         "rationale": "Wide-tracked all-caps in the primary sans. Used for editorial labels (section eyebrows, footer categories, artifact classifications). Deliberate and small, never decorative."
       },
       "body": {
-        "fontFamily": "Söhne",
+        "fontFamily": "Inter",
         "fontWeight": 400,
         "fontSize": "clamp(17px, 1.5vw, 19px)",
         "lineHeight": 1.65,
         "rationale": "Set slightly larger than typical web body for editorial pacing. Generous line-height signals unhurried reading."
       },
       "bodyLong": {
-        "fontFamily": "Söhne",
+        "fontFamily": "Inter",
         "fontWeight": 400,
         "fontSize": "clamp(19px, 1.6vw, 21px)",
         "lineHeight": 1.7,
         "rationale": "For manifesto-length content and long-form pages. The extra size and line-height carry the reader through sustained prose."
       },
       "bodySmall": {
-        "fontFamily": "Söhne",
+        "fontFamily": "Inter",
         "fontWeight": 400,
         "fontSize": "15px",
         "lineHeight": 1.55
       },
       "caption": {
-        "fontFamily": "Söhne",
+        "fontFamily": "Inter",
         "fontWeight": 500,
         "fontSize": "13px",
         "lineHeight": 1.45,
         "color": "inkSecondary"
       },
       "mono": {
-        "fontFamily": "Söhne Mono",
+        "fontFamily": "JetBrains Mono",
         "fontWeight": 500,
         "fontSize": "12px-13px",
         "letterSpacing": "0.02em",
@@ -148,7 +148,7 @@
         "rationale": "Mono is reserved for technical tags, artifact codes, and one-off editorial marks. Never used for prose."
       },
       "stats": {
-        "fontFamily": "Söhne",
+        "fontFamily": "Xolonium Bold Free",
         "fontWeight": 500,
         "fontSize": "clamp(64px, 9vw, 128px)",
         "lineHeight": 0.95,
@@ -159,24 +159,23 @@
   },
   "logoSpec": {
     "primary": {
-      "fontFamily": "Söhne",
-      "fontWeight": 500,
+      "fontFamily": "Xolonium Bold Free",
+      "fontWeight": 700,
       "fontSize": "20px",
       "letterSpacing": "-0.005em",
       "wordColors": {
-        "NextWave": "#0A0E1A",
-        "AI Solutions": "#6E7080"
+        "Naerix": "#0A0E1A"
       },
-      "treatment": "'NextWave' set in ink at medium weight, 'AI Solutions' immediately following in tertiary ink at the same weight. The two-tone treatment holds the firm's name as primary and the descriptor as classification. No custom letterforms, no icon, no mark. The typography is the identity."
+      "treatment": "'Naerix' set in ink at medium weight as a single-word wordmark. No custom letterforms, no icon, no mark. The typography is the identity."
     },
     "wordmark": {
-      "abbreviation": "NW",
-      "fontFamily": "Söhne",
-      "fontWeight": 600,
+      "abbreviation": "NX",
+      "fontFamily": "Xolonium Bold Free",
+      "fontWeight": 700,
       "fontSize": "18px-24px",
       "letterSpacing": "0",
       "color": "#0A0E1A",
-      "treatment": "Used in compact headers, favicons, document corners. When rendered against ink, use bone (#F4F1EA). When rendered as a hero mark, may use voltage for the 'W'."
+      "treatment": "Used in compact headers, favicons, document corners. When rendered against ink, use bone (#F4F1EA). When rendered as a hero mark, may use voltage for the 'X'."
     },
     "voltageAccent": {
       "usage": "A single voltage-colored dot or short underline may be paired with the wordmark on high-emphasis surfaces (hero, footer signature, business cards). Reserved for identity-anchor moments, never as general decoration."
@@ -392,7 +391,7 @@
     "heroMoment": {
       "name": "Emergent Order",
       "concept": "A canvas-based particle system that visualizes the firm's actual work: the transition from disorder to structured pattern. A field of 200 to 400 small particles begins in Brownian chaos, then gradually self-organizes into a structured pattern (a grid, a spiral, a wave, a logical graph), holds the pattern briefly, dissolves back into chaos, and reorganizes into a different pattern. Cycles roughly every 15 to 20 seconds.",
-      "purpose": "Communicates the substance of what NextWave does. Every client engagement is a version of this: taking a messy business process and organizing it into a durable system. The animation is the thesis in visual form.",
+      "purpose": "Communicates the substance of what Naerix does. Every client engagement is a version of this: taking a messy business process and organizing it into a durable system. The animation is the thesis in visual form.",
       "renderingApproach": "Canvas 2D with requestAnimationFrame, not WebGL. Chosen for performance, mobile compatibility, and load time. WebGL adds weight and battery cost that the marginal visual quality does not justify.",
       "particleSpec": {
         "count": "200 to 400 (adaptive based on viewport size)",
@@ -574,7 +573,7 @@
     },
     {
       "principle": "Distinct from the AI-vendor category",
-      "implication": "Warm bone, near-black ink, and confident chartreuse are chosen precisely to sit outside the electric-blue and purple-gradient territory occupied by every other AI firm. NextWave should be unmistakable for any other AI-adjacent property. If the brand starts looking like the category, the strategy has failed."
+      "implication": "Warm bone, near-black ink, and confident chartreuse are chosen precisely to sit outside the electric-blue and purple-gradient territory occupied by every other AI firm. Naerix should be unmistakable for any other AI-adjacent property. If the brand starts looking like the category, the strategy has failed."
     }
   ]
 }

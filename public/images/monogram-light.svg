@@ -1,8 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" width="48" height="48">
-  <title>NW</title>
-  <desc>NextWave AI Solutions monogram for light surfaces</desc>
+  <title>NX</title>
+  <desc>Naerix monogram for light surfaces</desc>
+  <style>
+    @font-face {
+      font-family: 'Xolonium Bold Free';
+      src: url('/fonts/Xolonium-Bold.ttf') format('truetype');
+      font-style: normal;
+      font-weight: 700;
+    }
+  </style>
   <text
-    font-family="'General Sans', 'Inter', system-ui, sans-serif"
-    font-size="32" font-weight="600" letter-spacing="0"
-    fill="#0A0E1A" x="24" y="36" text-anchor="middle">NW</text>
+    font-family="'Xolonium Bold Free', 'Xolonium', 'Sora', 'General Sans', 'Inter', system-ui, sans-serif"
+    font-size="32" font-weight="700" letter-spacing="0"
+    fill="#0A0E1A" x="24" y="36" text-anchor="middle">NX</text>
 </svg>

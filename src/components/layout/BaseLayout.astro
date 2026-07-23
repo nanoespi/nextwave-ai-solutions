@@ -8,7 +8,7 @@ interface Props {
 }
 
 const {
-  title = 'NextWave AI Solutions: Serious AI. Built locally.',
+  title = 'Naerix: Serious AI. Built locally.',
   description = 'We build AI automation systems for local service businesses. Missed revenue recovered. Processes systematized. Built in Jonesboro, AR.',
   ogImage = '/images/og/og-default.png',
 } = Astro.props;
@@ -34,7 +34,7 @@ const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN;
     <meta property="og:image" content={ogImageURL} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="NextWave AI Solutions" />
+    <meta property="og:site_name" content="Naerix" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -42,14 +42,7 @@ const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
 
-    <!-- Fonts: General Sans (Söhne fallback) via Fontshare -->
-    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
-    <link
-      href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Fonts: JetBrains Mono (Söhne Mono fallback) via Google Fonts -->
+    <!-- Fonts: JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

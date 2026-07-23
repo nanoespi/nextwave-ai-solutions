@@ -47,7 +47,8 @@
   --shadow-voltage: 0 8px 32px rgba(168,204,36,0.24);
 
   /* Typography */
-  --font-sans: 'General Sans', 'Inter', system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Xolonium Bold Free', 'Xolonium', 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
   /* Transitions */

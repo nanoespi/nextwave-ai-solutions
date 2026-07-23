@@ -25,6 +25,11 @@
     "@playwright/test": "^1.49.0",
     "@tailwindcss/vite": "^4.0.0",
     "@types/node": "^26.1.1",
+    "ttf2woff2": "^8.0.1",
     "typescript": "^5.0.0"
+  },
+  "allowScripts": {
+    "ttf2woff2@8.0.1": true,
+    "esbuild@0.28.1": true
   }
 }
