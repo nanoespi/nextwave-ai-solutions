@@ -2,7 +2,7 @@
 
 An independent Astro application for the Naerix parent brand, created with Mason's web design skill. [Design direction, seed, and content decisions](DESIGN_DIRECTION.md).
 
-The original site remains in the repository root with its files unchanged. This folder is the complete version 2 application on the `v2` branch. The repository's `main` branch retains the original site at `ab3dd0ab3e8c7e5207afe8a162899b90c7cfe156`; the `v1.0.0` tag preserves that source revision. Version 2 is released as `v2.0.0` and targets **https://nextwaveaisolutions.com**.
+The original site remains in the repository root with its files unchanged. This folder is the complete version 2 application on the `v2` branch. The repository's `main` branch retains the original site at `ab3dd0ab3e8c7e5207afe8a162899b90c7cfe156`; the `v1.0.0` tag preserves that source revision. Version 2 is released as `v2.0.1` and targets **https://nextwaveaisolutions.com**. The initial launch revision is also retained as `v2.0.0`.
 
 ## Run locally
 
@@ -78,7 +78,9 @@ npm.cmd test
 npx.cmd wrangler pages deploy dist --project-name nextwave-ai-solutions --branch v2
 ```
 
-Authenticate Wrangler through Cloudflare or a scoped local `CLOUDFLARE_API_TOKEN`. Never commit credentials. A different branch name creates a preview deployment. Both the apex and `www` domains remain attached to the existing Pages project; `www` redirects to the apex. Canonicals, Open Graph URLs, and the sitemap use `nextwaveaisolutions.com`. Production crawling is enabled; Cloudflare marks preview deployments with its `X-Robots-Tag: noindex` header.
+Authenticate Wrangler through Cloudflare or a scoped local `CLOUDFLARE_API_TOKEN`. Never commit credentials. A different branch name creates a preview deployment. Both the apex and `www` domains remain attached to the existing Pages project and serve the site. Canonicals, Open Graph URLs, and the sitemap use `nextwaveaisolutions.com`. Production crawling is enabled; Cloudflare marks preview deployments with its `X-Robots-Tag: noindex` header.
+
+The original app's `_redirects` file contains an absolute-host source rule that Cloudflare Pages does not support. Version 2 omits that ineffective rule. A future server-side `www` redirect should use a Cloudflare zone redirect rule; current deployment credentials do not grant access to this domain's zone rules. Both hostnames were verified serving the new site.
 
 The previous live site remains available at **https://df03b93c.nextwave-ai-solutions.pages.dev** (deployment `df03b93c-da68-4602-9d7c-90c76b0e8bbe`). To restore it, open this Pages project's Deployments in Cloudflare and select **Rollback to this deployment** for that deployment. Rollback restores the deployed site without changing Git history. Keep that deployment; do not delete it. To resume version 1 development, use `main` and the original root app. The previous upload was marked dirty, so its immutable deployment is the exact live reference; the Git tag preserves the committed source baseline.
 
