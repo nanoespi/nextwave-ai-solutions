@@ -28,7 +28,7 @@ The user's preference for dark, bold architectural design governs the result. On
 - **Palette:** near-black `#111210`, warm off-white `#EFEEE8`, olive-gray display accent, and a sparing `#D4FF3D` brand signal. Catherine uses sage; Brickwise uses copper; Jonesboro Sage preserves cream and deep sage, with Georgia editorial lettering.
 - **Geometry:** fine rules, open compositions, squared controls, no generic rounded card containers. The sculpture's faces use computed lighting shades; Catherine's sphere and Brickwise's planes use material shading.
 - **Imagery:** deterministic SVG/CSS artwork and the supplied logo. No stock founder portraits, invented product screenshots, or decorative business statistics.
-- **Motion:** one parent SVG transform; no WebGL runtime or per-frame JavaScript. A visible pause/resume control, offscreen/tab pausing, and reduced-motion support. Without JavaScript, the artwork remains static and all content stays visible.
+- **Motion:** the sculpture's actual geometry rotates once every 32 seconds, with projection, lighting, and face ordering shared between the server and browser. Updates are capped at 30 fps; no WebGL or new runtime dependency is needed. Pause/resume cancels rendering while paused, offscreen, or in a hidden tab. Reduced-motion users receive a static default and an explicit Play control. Without JavaScript, the artwork remains static and the control stays hidden.
 - **Responsive:** desktop side-by-side hero and three business features; stacked mobile content with native disclosure navigation. Keyboard focus survives skip navigation, fragment links, dismissal, and expansion to desktop navigation.
 - **Accessibility:** native semantic HTML, descriptive links, visible focus, focusable navigation targets, one main landmark and H1 per page, announcement text rather than nonfunctional signup controls. Automated axe checks supplement manual browser inspection.
 
@@ -55,10 +55,12 @@ Two Muse advisers received only generic technical briefs about native navigation
 
 Accepted and verified: focusable skip/fragment destinations; transferring focus from mobile navigation to its desktop equivalent; returning focus after outside dismissal where required; robust handling of observer absence; testing reduced-motion startup, pause persistence, and no-JavaScript operation.
 
-Rejected as an existing defect: a reduced-motion startup race. The code checks the media preference before enabling motion; the CSS fallback also disables it. This behavior is covered by a browser check. Low-end real-device frame-rate claims remain unverified and are not asserted.
+Rejected as an existing defect: a reduced-motion startup race. The code checks the media preference before enabling motion. This behavior is covered by a browser check. Low-end real-device frame-rate claims remain unverified and are not asserted.
+
+The motion refinement retains the original design seed. The initial flat SVG tilt was too subtle; it has been replaced by actual geometric rotation. Tests now compare rendered polygon coordinates over successive frames, verify that pause freezes them, and exercise the explicit reduced-motion Play control.
 
 ## Verification
 
 See the project README for the exact commands. Verification covers the production build, TypeScript/Astro diagnostics, desktop/tablet/mobile layouts down to 320px, axe WCAG A/AA checks, internal links and fragments, product-to-parent navigation, placeholders, 404 recovery, keyboard behavior, reduced motion, and no-JavaScript navigation. Screenshots and advisory receipts are local-only under `.codex/`.
 
-September 10 result: **0 Astro errors/warnings/hints, successful six-page build, 16/16 Playwright tests passing, and no axe violations across the five main pages at 1440, 768, 390, and 320px.** Visual screenshots were inspected for the homepage, both product announcements, About, and Contact; mobile homepage composition was also reviewed. These are local Chromium results, not a claim of real-device or cross-browser coverage.
+September 10 result: **0 Astro errors/warnings/hints, successful six-page build, 17/17 Playwright tests passing, and no axe violations across the five main pages at 1440, 768, 390, and 320px.** Visual screenshots were inspected for the homepage, both product announcements, About, and Contact; mobile homepage composition was also reviewed. These are local Chromium results, not a claim of real-device or cross-browser coverage.

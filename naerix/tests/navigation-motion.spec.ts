@@ -1,4 +1,15 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
+
+const renderedGeometry = (page: Page) =>
+  page
+    .locator('.sculpture-object polygon')
+    .evaluateAll((polygons) => polygons.map((polygon) => polygon.getAttribute('points')).join('|'));
+
+const waitForFrames = (page: Page, count = 12) =>
+  page.evaluate(async (frames) => {
+    for (let i = 0; i < frames; i++)
+      await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+  }, count);
 
 test('skip link moves focus into main content', async ({ page }) => {
   await page.goto('/');
@@ -69,19 +80,25 @@ test('mobile menu closes when tabbing out and on outside pointer interaction', a
 test('motion can be paused and the choice survives scrolling away and back', async ({ page }) => {
   await page.goto('/');
   const sculpture = page.locator('[data-sculpture]');
+  const initial = await renderedGeometry(page);
+  await expect.poll(() => renderedGeometry(page)).not.toBe(initial);
   await page.getByRole('button', { name: 'Pause motion' }).click();
-  await expect(page.getByRole('button', { name: 'Resume motion' })).toHaveAttribute(
-    'aria-pressed',
-    'true',
-  );
+  await expect(page.getByRole('button', { name: 'Resume motion' })).toBeVisible();
   await expect(sculpture).toHaveAttribute('data-paused', 'true');
+  const paused = await renderedGeometry(page);
+  await waitForFrames(page);
+  expect(await renderedGeometry(page)).toBe(paused);
   await page.locator('#values').scrollIntoViewIfNeeded();
   await page.locator('#hero-title').scrollIntoViewIfNeeded();
   await expect(sculpture).toHaveAttribute('data-paused', 'true');
   await page.getByRole('button', { name: 'Resume motion' }).click();
   await expect.poll(() => sculpture.getAttribute('data-paused')).toBe('false');
+  await expect.poll(() => renderedGeometry(page)).not.toBe(paused);
   await page.locator('#values').scrollIntoViewIfNeeded();
   await expect.poll(() => sculpture.getAttribute('data-paused')).toBe('true');
+  const offscreen = await renderedGeometry(page);
+  await waitForFrames(page);
+  expect(await renderedGeometry(page)).toBe(offscreen);
 });
 
 test('reduced motion disables animation on load and responds to a preference change', async ({
@@ -89,14 +106,33 @@ test('reduced motion disables animation on load and responds to a preference cha
 }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
-  await expect(page.locator('.motion-button')).toBeHidden();
-  await expect(page.locator('.sculpture-object')).toHaveCSS('animation-name', 'none');
+  await expect(page.getByRole('button', { name: 'Play motion' })).toBeVisible();
+  const initial = await renderedGeometry(page);
+  await waitForFrames(page);
+  expect(await renderedGeometry(page)).toBe(initial);
   await expect(page.locator('html')).toHaveCSS('scroll-behavior', 'auto');
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await expect(page.getByRole('button', { name: 'Pause motion' })).toBeVisible();
-  await expect
-    .poll(() =>
-      page.locator('.sculpture-object').evaluate((el) => getComputedStyle(el).animationName),
-    )
-    .not.toBe('none');
+  await expect.poll(() => renderedGeometry(page)).not.toBe(initial);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect(page.getByRole('button', { name: 'Play motion' })).toBeVisible();
+  const stopped = await renderedGeometry(page);
+  await waitForFrames(page);
+  expect(await renderedGeometry(page)).toBe(stopped);
+});
+
+test('reduced-motion visitors can explicitly play and pause the sculpture', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  const initial = await renderedGeometry(page);
+  await page.getByRole('button', { name: 'Play motion' }).click();
+  await expect.poll(() => renderedGeometry(page)).not.toBe(initial);
+  await page.getByRole('button', { name: 'Pause motion' }).click();
+  const paused = await renderedGeometry(page);
+  await waitForFrames(page);
+  expect(await renderedGeometry(page)).toBe(paused);
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await expect(page.getByRole('button', { name: 'Resume motion' })).toBeVisible();
+  await waitForFrames(page);
+  expect(await renderedGeometry(page)).toBe(paused);
 });

@@ -38,6 +38,7 @@ src/
     ui/         Arrow, Logo, BusinessArt
     motion/     Sculpture
   data/         businesses.json, nav.json
+  lib/          Shared sculpture projection and geometry
   pages/        index, about, contact, catherine-ai, brickwise, 404
   styles/       tokens.css, global.css
 public/
@@ -47,6 +48,8 @@ tests/          Playwright flow, accessibility, navigation, and motion checks
 ```
 
 Astro static output, TypeScript, Tailwind CSS v4, scoped CSS, and JSON content follow the original project conventions. Native semantic HTML handles the simple UI. No product backend, email collection, authentication, or paid service is included.
+
+The hero sculpture visibly rotates and includes Pause/Resume controls. Reduced-motion preferences keep it static initially, with a Play control available for an explicit choice. Rendering stops when paused, offscreen, or in a hidden tab. Without JavaScript, the server-rendered artwork remains visible and static.
 
 ## Verification
 
@@ -61,7 +64,7 @@ Tests serve the built site on loopback port **4323**, separately from the develo
 
 The suite checks all five pages at **1440, 768, 390, and 320px**, including axe WCAG A/AA rules, horizontal overflow, console errors, internal routes and anchors, coming-soon scope, explicit placeholders, 404 recovery, keyboard navigation, pause/resume, reduced motion, and operation without JavaScript. Automated accessibility checks do not replace a screen-reader or real-device review.
 
-Verified September 10, 2026: `astro check` reported zero errors, warnings, or hints; the static build generated six pages; **all 16 Playwright tests passed** in Chromium, with zero axe violations at the four tested widths. The original app's tracked files remain unchanged.
+Verified September 10, 2026: `astro check` reported zero errors, warnings, or hints; the static build generated six pages; **all 17 Playwright tests passed** in Chromium, with zero axe violations at the four tested widths. The original app's tracked files remain unchanged.
 
 ## Later content and launch work
 
