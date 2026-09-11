@@ -1,0 +1,246 @@
+---
+import businesses from '../../data/businesses.json';
+import Arrow from '../ui/Arrow.astro';
+import BusinessArt from '../ui/BusinessArt.astro';
+---
+
+<section id="businesses" class="businesses shell" aria-labelledby="businesses-title" tabindex="-1">
+  <div class="businesses-heading">
+    <p class="section-label eyebrow">
+      <span class="index">01 /</span> Our businesses
+    </p>
+    <div>
+      <h2 id="businesses-title" class="section-heading">
+        Different fields.
+        <br />
+        <span>Shared conviction.</span>
+      </h2>
+      <p>
+        Distinct businesses. The same belief in what happens
+        <br class="desktop-break" /> when the right expertise meets the right technology.
+      </p>
+    </div>
+  </div>
+  <div class="business-list">
+    {businesses.map((b) => (
+      <article class:list={['business', `business--${b.id}`]}>
+        <div class="business-top eyebrow">
+          <span>
+            {b.number} / {b.category}
+          </span>
+          <span class="status">{b.status}</span>
+        </div>
+        <a
+          class="business-visual"
+          href={b.href}
+          tabindex="-1"
+          aria-hidden="true"
+          target={b.external ? '_blank' : undefined}
+          rel={b.external ? 'noopener noreferrer' : undefined}
+        >
+          <BusinessArt brand={b.id as 'catherine' | 'brickwise' | 'sage'} />
+        </a>
+        <div class="business-copy">
+          <span class="business-type eyebrow">{b.type}</span>
+          <h3>
+            <a
+              href={b.href}
+              target={b.external ? '_blank' : undefined}
+              rel={b.external ? 'noopener noreferrer' : undefined}
+            >
+              {b.name}
+              <Arrow />
+              {b.external && <span class="sr-only"> (opens in a new tab)</span>}
+            </a>
+          </h3>
+          <p>{b.description}</p>
+          <a
+            class="text-link"
+            href={b.href}
+            target={b.external ? '_blank' : undefined}
+            rel={b.external ? 'noopener noreferrer' : undefined}
+          >
+            <span>
+              {b.external
+                ? 'Visit Jonesboro Sage'
+                : 'Discover ' + (b.id === 'catherine' ? 'Catherine AI' : 'Brickwise')}
+            </span>
+            <Arrow />
+            {b.external && <span class="sr-only"> (opens in a new tab)</span>}
+          </a>
+        </div>
+      </article>
+    ))}
+  </div>
+  <div class="businesses-note eyebrow">
+    <span>A growing family of businesses.</span>
+    <span>Built with intention. Operated with care.</span>
+  </div>
+</section>
+<style>
+  .businesses {
+    padding-block: 110px 90px;
+  }
+  .businesses-heading {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 38px;
+    padding-bottom: 55px;
+  }
+  .section-label {
+    padding-top: 8px;
+  }
+  .section-heading {
+    font-size: clamp(38px, 4.2vw, 61px);
+  }
+  .section-heading span {
+    color: var(--ink-subtle);
+  }
+  .businesses-heading p:not(.section-label) {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--ink-muted);
+    margin-top: 26px;
+  }
+  .business-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+  .business {
+    min-width: 0;
+  }
+  .business-top {
+    border-top: 1px solid var(--rule-strong);
+    padding-block: 18px;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    color: var(--ink-muted);
+  }
+  .status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .status::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+  .business--catherine .status {
+    color: var(--sage);
+  }
+  .business--brickwise .status {
+    color: var(--copper);
+  }
+  .business-visual {
+    display: block;
+  }
+  .business-visual :global(.business-art) {
+    transition: filter 250ms;
+  }
+  .business-visual:hover :global(.business-art) {
+    filter: brightness(1.08);
+  }
+  .business-copy {
+    padding: 25px 0 0;
+  }
+  .business-type {
+    color: var(--ink-subtle);
+    font-size: 10px;
+  }
+  h3 {
+    margin-block: 13px 15px;
+    font-size: clamp(20px, 1.9vw, 28px);
+    letter-spacing: -0.045em;
+    font-weight: 500;
+  }
+  h3 a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  h3 :global(svg) {
+    width: 19px;
+    height: 19px;
+  }
+  .business-copy p {
+    font-size: 13px;
+    line-height: 1.85;
+    color: var(--ink-muted);
+    min-height: 95px;
+    max-width: 340px;
+  }
+  .business-copy .text-link {
+    margin-top: 22px;
+    font-size: 11px;
+    gap: 20px;
+  }
+  .business-copy .text-link :global(svg) {
+    width: 13px;
+  }
+  .businesses-note {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+    border-top: 1px solid var(--rule);
+    margin-top: 46px;
+    padding-top: 22px;
+    font-size: 10px;
+    color: var(--ink-subtle);
+  }
+  @media (max-width: 1040px) and (min-width: 741px) {
+    .business-top {
+      flex-direction: column;
+      gap: 8px;
+    }
+    .business-list {
+      gap: 16px;
+    }
+    .business-copy p {
+      min-height: 122px;
+    }
+  }
+  @media (max-width: 740px) {
+    .businesses {
+      padding-block: 70px 60px;
+    }
+    .businesses-heading {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding-bottom: 40px;
+    }
+    .desktop-break {
+      display: none;
+    }
+    .business-list {
+      grid-template-columns: 1fr;
+      gap: 42px;
+    }
+    .business-top {
+      font-size: 10px;
+    }
+    .business-copy {
+      padding-top: 22px;
+    }
+    h3 {
+      font-size: 27px;
+    }
+    .business-copy p {
+      min-height: auto;
+      max-width: none;
+      font-size: 14px;
+    }
+    .businesses-note {
+      flex-direction: column;
+      gap: 12px;
+    }
+  }
+</style>

@@ -1,0 +1,276 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Values from '../components/sections/Values.astro';
+import Arrow from '../components/ui/Arrow.astro';
+---
+
+<BaseLayout
+  title="About Naerix | People, expertise, possibility."
+  description="Naerix builds and operates businesses. Our approach brings skilled experts, craftsmanship, and emerging technology together."
+>
+  <div id="top"></div>
+  <Header />
+  <main id="main" tabindex="-1">
+    <section class="about-hero shell" aria-labelledby="about-title">
+      <p class="section-label eyebrow">
+        <span class="index">01 /</span> About Naerix
+      </p>
+      <h1 id="about-title" class="page-heading">
+        People. Expertise.
+        <br />
+        <span>Possibility.</span>
+      </h1>
+      <div class="about-summary">
+        <p class="eyebrow">
+          A company that builds
+          <br />
+          and operates businesses.
+        </p>
+        <div>
+          <p>We believe skilled people can do extraordinary things with the right tools.</p>
+          <p>
+            Naerix brings industry experts and technology builders together. We create businesses
+            around real knowledge, with the care to build thoughtfully and the commitment to operate
+            what we build.
+          </p>
+          <p>
+            Our interests span industries. Our approach stays grounded in the people who know them
+            best.
+          </p>
+        </div>
+      </div>
+    </section>
+    <div class="about-values">
+      <Values full />
+    </div>
+    <section id="founders" tabindex="-1" class="founders shell" aria-labelledby="founders-title">
+      <div class="founders-heading">
+        <p class="section-label eyebrow">
+          <span class="index">04 /</span> The founders
+        </p>
+        <div>
+          <h2 id="founders-title" class="section-heading">
+            The people
+            <br />
+            behind the work.
+          </h2>
+          <p class="body-copy">Our founder introductions are coming soon.</p>
+        </div>
+      </div>
+      <div class="founders-grid">
+        {[1, 2, 3].map((number) => (
+          <article class="founder">
+            <div class="portrait-placeholder" aria-label="Founder portrait placeholder">
+              <span class="portrait-frame" aria-hidden="true">
+                <i></i>
+              </span>
+              <span class="eyebrow">Portrait coming soon</span>
+            </div>
+            <div class="founder-heading">
+              <h3>Founder name</h3>
+              <span class="eyebrow">0{number}</span>
+            </div>
+            <p class="eyebrow founder-role">Role to be announced</p>
+            <p class="founder-bio">Biography coming soon.</p>
+          </article>
+        ))}
+      </div>
+    </section>
+    <section class="about-next shell">
+      <p class="eyebrow">See the thinking take shape.</p>
+      <a href="/#businesses">
+        Explore our businesses
+        <Arrow />
+      </a>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+<style>
+  .about-hero {
+    padding-block: 75px 95px;
+  }
+  h1 {
+    margin-top: 48px;
+    font-size: clamp(52px, 7.7vw, 111px);
+  }
+  h1 span {
+    color: #a8ae9b;
+  }
+  .about-summary {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 80px;
+    margin-top: 64px;
+    padding-top: 30px;
+    border-top: 1px solid var(--rule);
+  }
+  .about-summary > .eyebrow {
+    color: var(--ink-subtle);
+    font-size: 10px;
+    line-height: 1.9;
+  }
+  .about-summary > div {
+    max-width: 560px;
+  }
+  .about-summary > div p {
+    color: var(--ink-muted);
+    font-size: 16px;
+    line-height: 1.85;
+    margin-bottom: 20px;
+  }
+  .about-summary > div p:first-child {
+    font-size: 25px;
+    line-height: 1.45;
+    color: var(--ink);
+    letter-spacing: -0.03em;
+    margin-bottom: 28px;
+  }
+  .about-values {
+    background: var(--surface-raised);
+    border-block: 1px solid var(--rule);
+  }
+  .founders {
+    padding-block: 95px;
+  }
+  .founders-heading {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 38px;
+  }
+  .founders-heading .body-copy {
+    font-size: 14px;
+    margin-top: 24px;
+  }
+  .founders-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+    margin-top: 55px;
+  }
+  .portrait-placeholder {
+    height: 310px;
+    background: #1b1e18;
+    border: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 36px;
+  }
+  .portrait-placeholder > .eyebrow {
+    color: var(--ink-subtle);
+    font-size: 10px;
+  }
+  .portrait-frame {
+    display: grid;
+    place-content: center;
+    width: 90px;
+    height: 110px;
+    border: 1px solid #525849;
+    position: relative;
+  }
+  .portrait-frame::before,
+  .portrait-frame::after {
+    content: '';
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    height: 1px;
+    background: var(--rule);
+  }
+  .portrait-frame::before {
+    top: 12px;
+  }
+  .portrait-frame::after {
+    bottom: 12px;
+  }
+  .portrait-frame i {
+    width: 7px;
+    height: 7px;
+    border: 1px solid #757e69;
+  }
+  .founder-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 24px;
+  }
+  .founder-heading h3 {
+    font-size: 22px;
+    letter-spacing: -0.04em;
+  }
+  .founder-heading > span {
+    color: var(--ink-subtle);
+    font-size: 10px;
+  }
+  .founder-role {
+    font-size: 10px;
+    color: var(--ink-subtle);
+    margin-top: 13px;
+  }
+  .founder-bio {
+    color: var(--ink-muted);
+    font-size: 13px;
+    margin-top: 20px;
+  }
+  .about-next {
+    border-top: 1px solid var(--rule);
+    padding-block: 45px 85px;
+  }
+  .about-next p {
+    color: var(--ink-subtle);
+    font-size: 10px;
+  }
+  .about-next > a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    font-size: clamp(28px, 4.5vw, 65px);
+    letter-spacing: -0.055em;
+    margin-top: 24px;
+  }
+  .about-next :global(svg) {
+    width: 45px;
+    height: 45px;
+  }
+  @media (max-width: 740px) {
+    .about-hero {
+      padding-block: 46px 55px;
+    }
+    h1 {
+      margin-top: 35px;
+      font-size: clamp(46px, 10.3vw, 76px);
+    }
+    .about-summary {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      margin-top: 40px;
+    }
+    .founders {
+      padding-block: 62px;
+    }
+    .founders-heading {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    .founders-grid {
+      grid-template-columns: 1fr;
+      gap: 42px;
+      margin-top: 35px;
+    }
+    .portrait-placeholder {
+      height: 300px;
+    }
+    .about-next {
+      padding-block: 36px 55px;
+    }
+    .about-next :global(svg) {
+      width: 24px;
+      flex-shrink: 0;
+    }
+  }
+</style>

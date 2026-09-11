@@ -1,0 +1,160 @@
+---
+import Sculpture from '../motion/Sculpture.astro';
+import Arrow from '../ui/Arrow.astro';
+---
+
+<section class="hero shell" aria-labelledby="hero-title">
+  <div class="hero-main">
+    <div class="hero-copy">
+      <p class="eyebrow hero-eyebrow">
+        <span></span> A company built to build.
+      </p>
+      <h1 id="hero-title">
+        Expertise.
+        <br />
+        <span>Amplified.</span>
+      </h1>
+      <p class="hero-description">
+        We build and operate businesses at the intersection of deep industry knowledge and emerging
+        technology.
+      </p>
+      <a class="button-link" href="#businesses">
+        Explore our businesses
+        <Arrow direction="down" />
+      </a>
+    </div>
+    <div class="hero-art">
+      <Sculpture />
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <span class="eyebrow">Human expertise × Intelligent technology</span>
+    <a href="#businesses" class="scroll-cue eyebrow">
+      Discover Naerix
+      <Arrow direction="down" />
+    </a>
+  </div>
+</section>
+<style>
+  .hero-main {
+    display: grid;
+    grid-template-columns: 1.08fr 1fr;
+    align-items: center;
+    min-height: min(690px, calc(100svh - 160px));
+    gap: 8px;
+    padding-block: 26px 46px;
+  }
+  .hero-copy {
+    position: relative;
+    z-index: 1;
+    padding-bottom: 18px;
+  }
+  .hero-eyebrow {
+    color: var(--ink-muted);
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+  .hero-eyebrow span {
+    width: 5px;
+    height: 5px;
+    background: var(--accent);
+  }
+  h1 {
+    font-size: clamp(66px, 8.05vw, 116px);
+    letter-spacing: -0.078em;
+    line-height: 0.99;
+    font-weight: 500;
+    margin-left: -6px;
+  }
+  h1 > span {
+    color: #a8ae9b;
+  }
+  .hero-description {
+    max-width: 367px;
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--ink-muted);
+    margin: 32px 0 32px;
+  }
+  .hero-art {
+    width: calc(100% + 36px);
+    margin-left: -12px;
+    margin-top: -20px;
+  }
+  .hero-bottom {
+    border-top: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 16px;
+    gap: 20px;
+  }
+  .hero-bottom > span {
+    color: var(--ink-subtle);
+    font-size: 10px;
+  }
+  .scroll-cue {
+    display: inline-flex;
+    align-items: center;
+    gap: 25px;
+    min-height: 36px;
+    font-size: 10px;
+  }
+  .scroll-cue :global(svg) {
+    width: 13px;
+    height: 13px;
+  }
+  @media (min-width: 1600px) {
+    .hero-main {
+      min-height: 720px;
+    }
+  }
+  @media (max-width: 950px) {
+    .hero-main {
+      min-height: 580px;
+    }
+    h1 {
+      font-size: 8.9vw;
+    }
+    .hero-art {
+      width: calc(100% + 25px);
+    }
+  }
+  @media (max-width: 740px) {
+    .hero-main {
+      grid-template-columns: 1fr;
+      padding-top: 36px;
+      padding-bottom: 24px;
+      gap: 0;
+    }
+    .hero-eyebrow {
+      margin-bottom: 28px;
+      font-size: 10px;
+    }
+    h1 {
+      font-size: clamp(63px, 16vw, 105px);
+      margin-left: -3px;
+    }
+    .hero-description {
+      margin-block: 25px;
+      font-size: 14px;
+      max-width: 350px;
+    }
+    .hero-art {
+      width: min(100%, 480px);
+      justify-self: center;
+      margin: -5px 0 0;
+    }
+    .hero-bottom > span {
+      font-size: 10px;
+      max-width: 190px;
+    }
+    .scroll-cue {
+      font-size: 10px;
+      gap: 8px;
+    }
+  }
+</style>

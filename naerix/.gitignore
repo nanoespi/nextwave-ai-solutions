@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+.codex/
+test-results/
+playwright-report/
+.env*
+!README.md
+!DESIGN_DIRECTION.md

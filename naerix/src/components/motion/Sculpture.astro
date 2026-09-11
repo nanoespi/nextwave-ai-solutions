@@ -1,0 +1,233 @@
+---
+type Point = [number, number, number];
+type Face = { points: Point[]; color: string; depth: number };
+const faces: Face[] = [];
+const project = ([x, y, z]: Point) =>
+  `${(320 + (x - z) * 0.94).toFixed(2)},${(343 - y * 0.92 + (x + z) * 0.35).toFixed(2)}`;
+function face(points: Point[], color: string) {
+  faces.push({
+    points,
+    color,
+    depth: points.reduce((sum, [x, y, z]) => sum + x + z + y * 3.8, 0) / points.length,
+  });
+}
+for (let layer = 0; layer < 19; layer++) {
+  const rotation = -0.16 + layer * 0.054;
+  const height = -158 + layer * 17.5;
+  const vertex = (x: number, z: number, y: number): Point => [
+    x * Math.cos(rotation) - z * Math.sin(rotation),
+    y,
+    x * Math.sin(rotation) + z * Math.cos(rotation),
+  ];
+  const corners = [
+    [-141, -141],
+    [141, -141],
+    [141, 141],
+    [-141, 141],
+  ];
+  const inner = corners.map(([x, z]) => [x * 0.47, z * 0.47]);
+  for (let side = 0; side < 4; side++) {
+    const next = (side + 1) % 4;
+    const [x, z] = corners[side],
+      [nx, nz] = corners[next];
+    const [ix, iz] = inner[side],
+      [inx, inz] = inner[next];
+    const brightness = Math.round(
+      178 + 25 * Math.sin(rotation + (side * Math.PI) / 2) + layer * 1.7,
+    );
+    face(
+      [
+        vertex(x, z, height + 7),
+        vertex(nx, nz, height + 7),
+        vertex(inx, inz, height + 7),
+        vertex(ix, iz, height + 7),
+      ],
+      `rgb(${brightness},${brightness + 1},${brightness - 7})`,
+    );
+    const shade = Math.round(
+      78 + 62 * Math.max(0, Math.cos(rotation + (side * Math.PI) / 2)) + layer * 1.5,
+    );
+    face(
+      [
+        vertex(x, z, height),
+        vertex(nx, nz, height),
+        vertex(nx, nz, height + 7),
+        vertex(x, z, height + 7),
+      ],
+      `rgb(${shade},${shade + 3},${shade - 2})`,
+    );
+    face(
+      [
+        vertex(ix, iz, height),
+        vertex(inx, inz, height),
+        vertex(inx, inz, height + 7),
+        vertex(ix, iz, height + 7),
+      ],
+      `rgb(${shade - 24},${shade - 21},${shade - 28})`,
+    );
+  }
+}
+faces.sort((a, b) => a.depth - b.depth);
+---
+
+<div class="sculpture" data-sculpture>
+  <div class="art-frame" aria-hidden="true">
+    <span class="registration registration--tl"></span>
+    <span class="registration registration--tr"></span>
+    <span class="registration registration--bl"></span>
+    <span class="registration registration--br"></span>
+    <svg class="sculpture-object" viewBox="0 0 640 660" fill="none">
+      <defs>
+        <radialGradient id="ground">
+          <stop stop-color="#000" stop-opacity=".8" />
+          <stop offset="1" stop-color="#000" stop-opacity="0" />
+        </radialGradient>
+      </defs>
+      <ellipse cx="320" cy="593" rx="250" ry="38" fill="url(#ground)" />
+      <g>
+        {faces.map((f) => (
+          <polygon
+            points={f.points.map(project).join(' ')}
+            fill={f.color}
+            stroke={f.color}
+            stroke-width=".45"
+          />
+        ))}
+      </g>
+    </svg>
+  </div>
+  <div class="art-caption">
+    <span class="eyebrow">Many perspectives. One direction.</span>
+    <button type="button" class="motion-button eyebrow" aria-pressed="false" hidden>
+      <span class="motion-symbol" aria-hidden="true">
+        Ⅱ
+      </span>
+      <span data-motion-label>Pause motion</span>
+    </button>
+  </div>
+</div>
+<style>
+  .sculpture {
+    width: 100%;
+  }
+  .art-frame {
+    position: relative;
+    padding: 8px;
+  }
+  .sculpture-object {
+    width: 100%;
+    will-change: auto;
+  }
+  [data-moving='true'] .sculpture-object {
+    animation: turn 15s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+  [data-paused='true'] .sculpture-object {
+    animation-play-state: paused;
+  }
+  .registration {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    opacity: 0.7;
+  }
+  .registration--tl {
+    left: 2%;
+    top: 10%;
+    border-top: 1px solid var(--rule-strong);
+    border-left: 1px solid var(--rule-strong);
+  }
+  .registration--tr {
+    right: 2%;
+    top: 10%;
+    border-top: 1px solid var(--rule-strong);
+    border-right: 1px solid var(--rule-strong);
+  }
+  .registration--bl {
+    left: 2%;
+    bottom: 7%;
+    border-bottom: 1px solid var(--rule-strong);
+    border-left: 1px solid var(--rule-strong);
+  }
+  .registration--br {
+    right: 2%;
+    bottom: 7%;
+    border-bottom: 1px solid var(--rule-strong);
+    border-right: 1px solid var(--rule-strong);
+  }
+  .art-caption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-inline: 2%;
+    color: var(--ink-subtle);
+  }
+  .art-caption .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.075em;
+  }
+  .motion-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 0 12px 8px;
+    border: 0;
+    background: transparent;
+    min-height: 44px;
+    white-space: nowrap;
+  }
+  .motion-button:hover {
+    color: var(--ink);
+  }
+  .motion-symbol {
+    font-size: 13px;
+    width: 15px;
+    text-align: center;
+  }
+  @keyframes turn {
+    from {
+      transform: perspective(1000px) rotateY(-9deg) rotateX(2deg) translateY(4px);
+    }
+    to {
+      transform: perspective(1000px) rotateY(9deg) rotateX(-2deg) translateY(-7px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .motion-button {
+      display: none;
+    }
+  }
+</style>
+<script>
+  const sculpture = document.querySelector<HTMLElement>('[data-sculpture]');
+  const button = sculpture?.querySelector<HTMLButtonElement>('.motion-button');
+  const label = sculpture?.querySelector<HTMLElement>('[data-motion-label]');
+  const symbol = sculpture?.querySelector<HTMLElement>('.motion-symbol');
+  if (sculpture && button && label && symbol) {
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    let userPaused = false;
+    let inView = true;
+    const sync = () => {
+      sculpture.dataset.moving = String(!reduced.matches);
+      sculpture.dataset.paused = String(userPaused || !inView || document.hidden);
+      button.hidden = reduced.matches;
+      button.setAttribute('aria-pressed', String(userPaused));
+      label.textContent = userPaused ? 'Resume motion' : 'Pause motion';
+      symbol.textContent = userPaused ? '▷' : 'Ⅱ';
+    };
+    button.addEventListener('click', () => {
+      userPaused = !userPaused;
+      sync();
+    });
+    reduced.addEventListener('change', sync);
+    document.addEventListener('visibilitychange', sync);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([entry]) => {
+        inView = entry.isIntersecting;
+        sync();
+      }).observe(sculpture);
+    }
+    sync();
+  }
+</script>

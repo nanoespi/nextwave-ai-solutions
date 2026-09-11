@@ -1,0 +1,191 @@
+---
+interface Props {
+  brand: 'catherine' | 'brickwise' | 'sage';
+}
+const { brand } = Astro.props;
+---
+
+<div class:list={['business-art', `business-art--${brand}`]} aria-hidden="true">
+  {brand === 'catherine' && (
+    <>
+      <div class="catherine-orb">
+        <div class="orb-inner"></div>
+      </div>
+      <span class="catherine-name">
+        Catherine<span>AI</span>
+      </span>
+      <span class="art-line eyebrow">A little space for yourself.</span>
+    </>
+  )}
+  {brand === 'brickwise' && (
+    <>
+      <svg class="brick-structure" viewBox="0 0 400 280" fill="none">
+        <g stroke="#e6b28e" stroke-width="1.2">
+          {[0, 1, 2, 3, 4, 5, 6].map((i) => (
+            <>
+              <path d={`M${72 + i * 8} ${85 + i * 15}l128 -65 128 65-128 66Z`} />
+              <path d={`M${72 + i * 8} ${85 + i * 15}v17l128 66 128-66V${85 + i * 15}`} />
+            </>
+          ))}
+        </g>
+      </svg>
+      <span class="brickwise-name">
+        <small>NAERIX</small>Brickwise<span class="brick-dot">.</span>
+      </span>
+      <span class="art-line eyebrow">Built around the real world.</span>
+    </>
+  )}
+  {brand === 'sage' && (
+    <>
+      <span class="sage-icon">S</span>
+      <span class="sage-name">
+        Jonesboro
+        <br />
+        <em>Sage</em>
+      </span>
+      <span class="sage-rule"></span>
+      <span class="art-line eyebrow">Local knowledge, open to everyone.</span>
+    </>
+  )}
+</div>
+<style>
+  .business-art {
+    min-height: 352px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .art-line {
+    position: absolute;
+    bottom: 27px;
+    left: 24px;
+    right: 24px;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.11em;
+  }
+  .business-art--catherine {
+    background: #263329;
+    color: #c6d3b8;
+  }
+  .catherine-orb {
+    width: 210px;
+    height: 210px;
+    position: absolute;
+    left: calc(50% - 105px);
+    top: 32px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle at 32% 26%,
+      #c0cfb0 0%,
+      #879c77 35%,
+      #4b6242 66%,
+      #2c3c2a 84%
+    );
+    box-shadow:
+      inset -12px -18px 25px #172b2955,
+      0 30px 46px #0a170c55;
+  }
+  .orb-inner {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    top: 20px;
+    left: 23px;
+    border-radius: 50%;
+    box-shadow: inset 6px 5px 20px #ffffff05;
+  }
+  .catherine-name {
+    position: relative;
+    font-family: Georgia, serif;
+    font-size: clamp(36px, 3.9vw, 61px);
+    letter-spacing: -0.045em;
+    margin-top: 110px;
+    text-shadow: 0 2px 18px #19302166;
+  }
+  .catherine-name > span {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    letter-spacing: 0.02em;
+    margin-left: 5px;
+    vertical-align: top;
+    position: relative;
+    top: 12px;
+  }
+  .business-art--brickwise {
+    background: #2e2823;
+    color: #e0af8e;
+  }
+  .brick-structure {
+    position: absolute;
+    width: 310px;
+    opacity: 0.35;
+    left: calc(50% - 158px);
+    top: -13px;
+    transform: rotate(-8deg);
+  }
+  .brickwise-name {
+    position: relative;
+    font-size: clamp(32px, 3.8vw, 58px);
+    font-weight: 550;
+    letter-spacing: -0.065em;
+    margin-top: 100px;
+  }
+  .brickwise-name small {
+    display: block;
+    font-family: var(--font-brand);
+    font-size: 10px;
+    letter-spacing: 0.13em;
+    margin-bottom: 3px;
+  }
+  .brick-dot {
+    color: #f5dbc5;
+  }
+  .business-art--sage {
+    background: var(--cream);
+    color: #4a5a40;
+  }
+  .sage-icon {
+    width: 31px;
+    height: 37px;
+    border: 1px solid #4a5a40;
+    border-radius: 18px 18px 0 0;
+    display: grid;
+    place-content: center;
+    font-family: Georgia, serif;
+    font-size: 23px;
+    margin-bottom: 14px;
+  }
+  .sage-name {
+    font-family: Georgia, serif;
+    font-size: clamp(35px, 3.6vw, 54px);
+    line-height: 0.95;
+    letter-spacing: -0.06em;
+    text-align: center;
+  }
+  .sage-name em {
+    font-weight: 400;
+  }
+  .sage-rule {
+    width: 60%;
+    border-top: 1px solid #4a5a402b;
+    margin-top: 28px;
+  }
+  @media (max-width: 740px) {
+    .business-art {
+      min-height: 330px;
+    }
+    .catherine-name {
+      font-size: 53px;
+    }
+    .brickwise-name {
+      font-size: 49px;
+    }
+    .sage-name {
+      font-size: 48px;
+    }
+  }
+</style>

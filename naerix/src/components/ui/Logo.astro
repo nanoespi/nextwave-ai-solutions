@@ -1,0 +1,27 @@
+---
+interface Props {
+  large?: boolean;
+}
+const { large = false } = Astro.props;
+---
+
+<!-- Crop the original outlined logo to its wordmark. The artwork is unmodified. -->
+<svg
+  class:list={['logo', { 'logo--large': large }]}
+  viewBox="330 307 1110 245"
+  role="img"
+  aria-label="NAERIX."
+>
+  <rect x="0" y="0" width="1774" height="887" fill="white" />
+  <image href="/images/naerix_logo.svg" width="1774" height="887" />
+</svg>
+<style>
+  .logo {
+    width: 144px;
+    height: auto;
+    mix-blend-mode: screen;
+  }
+  .logo--large {
+    width: 100%;
+  }
+</style>

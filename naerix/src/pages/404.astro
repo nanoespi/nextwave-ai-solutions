@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Arrow from '../components/ui/Arrow.astro';
+---
+
+<BaseLayout title="Page not found | NAERIX.">
+  <div id="top"></div>
+  <Header />
+  <main id="main" tabindex="-1" class="not-found shell">
+    <p class="eyebrow">404 / Page not found</p>
+    <h1 class="page-heading">
+      A different
+      <br />
+      direction.
+    </h1>
+    <p>This page isn’t here. There’s plenty to explore.</p>
+    <a class="button-link" href="/">
+      Back to Naerix
+      <Arrow />
+    </a>
+  </main>
+  <Footer />
+</BaseLayout>
+<style>
+  .not-found {
+    padding-block: 90px 110px;
+  }
+  .not-found > .eyebrow {
+    color: var(--ink-subtle);
+  }
+  h1 {
+    margin-block: 35px;
+  }
+  .not-found > p:not(.eyebrow) {
+    color: var(--ink-muted);
+    line-height: 1.8;
+  }
+  .button-link {
+    margin-top: 35px;
+  }
+</style>

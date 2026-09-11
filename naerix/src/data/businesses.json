@@ -1,0 +1,35 @@
+[
+  {
+    "id": "catherine",
+    "number": "01",
+    "name": "Catherine AI",
+    "category": "Mental wellness",
+    "type": "Software",
+    "status": "Coming soon",
+    "href": "/catherine-ai/",
+    "external": false,
+    "description": "A new direction in mental wellness. Thoughtfully building the connection between human understanding and artificial intelligence."
+  },
+  {
+    "id": "brickwise",
+    "number": "02",
+    "name": "NAERIX Brickwise",
+    "category": "Facilities management",
+    "type": "Services",
+    "status": "Coming soon",
+    "href": "/brickwise/",
+    "external": false,
+    "description": "Deep facilities expertise, supported by modern technology. A considered approach to the places people depend on."
+  },
+  {
+    "id": "sage",
+    "number": "03",
+    "name": "Jonesboro Sage",
+    "category": "Public knowledge",
+    "type": "Data platform",
+    "status": "Subsidiary",
+    "href": "https://jonesborosage.com",
+    "external": true,
+    "description": "Local knowledge, open to everyone. A public-data library connecting people with the records that shape Jonesboro and Northeast Arkansas."
+  }
+]

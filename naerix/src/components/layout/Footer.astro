@@ -1,0 +1,135 @@
+---
+import Logo from '../ui/Logo.astro';
+import Arrow from '../ui/Arrow.astro';
+import businesses from '../../data/businesses.json';
+---
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="footer-top">
+      <div class="footer-statement">
+        <span class="eyebrow">Independent thinking. Shared ambition.</span>
+        <p>
+          Good businesses
+          <br />
+          start with people.
+        </p>
+        <a class="text-link" href="/contact/">
+          <span>Get to know Naerix</span>
+          <Arrow />
+        </a>
+      </div>
+      <nav aria-label="Footer businesses">
+        <span class="eyebrow">Our businesses</span>
+        {businesses.map((b) => (
+          <a
+            href={b.href}
+            target={b.external ? '_blank' : undefined}
+            rel={b.external ? 'noopener noreferrer' : undefined}
+          >
+            {b.name}
+            {b.external && (
+              <>
+                <span aria-hidden="true"> ↗</span>
+                <span class="sr-only"> (opens in a new tab)</span>
+              </>
+            )}
+          </a>
+        ))}
+      </nav>
+      <nav aria-label="Footer company">
+        <span class="eyebrow">Company</span>
+        <a href="/about/">About Naerix</a>
+        <a href="/about/#values">Our values</a>
+        <a href="/about/#founders">Our founders</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-wordmark">
+      <Logo large />
+    </div>
+    <div class="footer-bottom eyebrow">
+      <span>© {new Date().getFullYear()} Naerix</span>
+      <span>Expertise. Amplified.</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+<style>
+  .site-footer {
+    padding-block: 84px 26px;
+    border-top: 1px solid var(--rule);
+    background: #0d0e0c;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr 0.6fr;
+    gap: 60px;
+  }
+  .footer-statement > .eyebrow {
+    color: var(--ink-subtle);
+    font-size: 10px;
+  }
+  .footer-statement p {
+    font-size: clamp(28px, 3.4vw, 46px);
+    letter-spacing: -0.05em;
+    line-height: 1.12;
+    margin: 20px 0;
+  }
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-top: 4px;
+  }
+  nav > .eyebrow {
+    font-size: 10px;
+    color: var(--ink-subtle);
+    margin-bottom: 16px;
+  }
+  nav a {
+    font-size: 13px;
+    width: fit-content;
+    padding-block: 3px;
+  }
+  nav a:hover {
+    color: var(--accent);
+  }
+  .footer-wordmark {
+    margin: 82px -2.6% 24px;
+  }
+  .footer-bottom {
+    border-top: 1px solid var(--rule);
+    padding-top: 26px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    font-size: 10px;
+    color: var(--ink-muted);
+  }
+  @media (max-width: 740px) {
+    .site-footer {
+      padding-top: 56px;
+    }
+    .footer-top {
+      grid-template-columns: 1fr 1fr;
+      gap: 44px 28px;
+    }
+    .footer-statement {
+      grid-column: 1 / -1;
+    }
+    nav a {
+      min-height: 32px;
+    }
+    .footer-wordmark {
+      margin-block: 48px 20px;
+    }
+    .footer-bottom {
+      flex-wrap: wrap;
+      font-size: 10px;
+    }
+    .footer-bottom > span:nth-child(2) {
+      display: none;
+    }
+  }
+</style>

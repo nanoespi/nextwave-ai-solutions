@@ -1,0 +1,217 @@
+---
+import Logo from '../ui/Logo.astro';
+import Arrow from '../ui/Arrow.astro';
+import nav from '../../data/nav.json';
+const path = Astro.url.pathname.replace(/\/$/, '');
+---
+
+<header class="site-header">
+  <div class="header-inner shell">
+    <a href="/" aria-label="Naerix home" class="brand">
+      <Logo />
+    </a>
+    <span class="header-note eyebrow">Ideas into enterprises.</span>
+    <nav aria-label="Main navigation" class="desktop-nav">
+      {nav.map((item) => (
+        <a
+          href={item.href}
+          aria-current={path === item.href.replace(/\/$/, '') ? 'page' : undefined}
+        >
+          {item.label}
+          {item.label === 'Contact' && <Arrow />}
+        </a>
+      ))}
+    </nav>
+    <details class="mobile-menu">
+      <summary>
+        <span class="eyebrow">Menu</span>
+        <span class="menu-icon" aria-hidden="true">
+          <i></i>
+          <i></i>
+        </span>
+      </summary>
+      <nav aria-label="Mobile navigation">
+        {nav.map((item, index) => (
+          <a href={item.href}>
+            <span class="eyebrow">0{index + 1}</span>
+            {item.label}
+            <Arrow />
+          </a>
+        ))}
+        <p class="eyebrow">Independent thinking. Shared ambition.</p>
+      </nav>
+    </details>
+  </div>
+</header>
+<style>
+  .site-header {
+    position: relative;
+    z-index: 50;
+    background: var(--surface);
+  }
+  .header-inner {
+    min-height: 104px;
+    display: flex;
+    align-items: center;
+    gap: 38px;
+  }
+  .brand {
+    flex-shrink: 0;
+    display: block;
+    padding: 12px 0;
+  }
+  .header-note {
+    padding-left: 32px;
+    border-left: 1px solid var(--rule);
+    color: var(--ink-subtle);
+    font-size: 10px;
+    letter-spacing: 0.07em;
+  }
+  .desktop-nav {
+    display: flex;
+    gap: 30px;
+    margin-left: auto;
+    align-items: center;
+  }
+  .desktop-nav a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    font-size: 12px;
+    color: var(--ink-muted);
+    transition: color 160ms;
+  }
+  .desktop-nav a:hover,
+  .desktop-nav a[aria-current] {
+    color: var(--ink);
+  }
+  .desktop-nav a:last-child {
+    color: var(--ink);
+    margin-left: 12px;
+  }
+  .desktop-nav :global(svg) {
+    width: 14px;
+    height: 14px;
+  }
+  .mobile-menu {
+    display: none;
+  }
+  @media (max-width: 1120px) {
+    .header-note {
+      display: none;
+    }
+  }
+  @media (max-width: 740px) {
+    .header-inner {
+      min-height: 88px;
+      justify-content: space-between;
+    }
+    .desktop-nav {
+      display: none;
+    }
+    .mobile-menu {
+      display: block;
+    }
+    summary {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-height: 48px;
+      cursor: pointer;
+    }
+    summary::-webkit-details-marker {
+      display: none;
+    }
+    .menu-icon {
+      width: 20px;
+      display: grid;
+      gap: 6px;
+    }
+    .menu-icon i {
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: var(--ink);
+      transition: transform 200ms;
+    }
+    details[open] .menu-icon i:first-child {
+      transform: translateY(3.5px) rotate(45deg);
+    }
+    details[open] .menu-icon i:last-child {
+      transform: translateY(-3.5px) rotate(-45deg);
+    }
+    .mobile-menu nav {
+      position: absolute;
+      top: 88px;
+      left: 0;
+      right: 0;
+      padding: 12px var(--gutter) 34px;
+      background: var(--surface);
+      box-shadow: 0 18px 30px #0006;
+      border-bottom: 1px solid var(--rule);
+    }
+    .mobile-menu nav a {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      padding-block: 23px;
+      font-size: 23px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .mobile-menu nav a .eyebrow {
+      color: var(--ink-subtle);
+      font-size: 10px;
+    }
+    .mobile-menu nav :global(svg) {
+      width: 18px;
+      margin-left: auto;
+    }
+    .mobile-menu nav p {
+      color: var(--ink-subtle);
+      padding-top: 26px;
+      font-size: 10px;
+    }
+  }
+</style>
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>('.mobile-menu');
+  const summary = menu?.querySelector('summary');
+  menu?.querySelectorAll('a').forEach((link) =>
+    link.addEventListener('click', () => {
+      menu.open = false;
+    }),
+  );
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && menu?.open) {
+      menu.open = false;
+      summary?.focus();
+    }
+  });
+  document.addEventListener('click', (event) => {
+    if (menu?.open && event.target instanceof Node && !menu.contains(event.target)) {
+      const focusWasInside = menu.contains(document.activeElement);
+      menu.open = false;
+      if (focusWasInside) summary?.focus();
+    }
+  });
+  menu?.addEventListener('focusout', () => {
+    requestAnimationFrame(() => {
+      if (!menu.contains(document.activeElement)) menu.open = false;
+    });
+  });
+  matchMedia('(min-width: 741px)').addEventListener('change', (event) => {
+    if (!event.matches || !menu) return;
+    const active = document.activeElement;
+    const focusWasInside = active instanceof HTMLElement && menu.contains(active);
+    const href = active instanceof HTMLAnchorElement ? active.getAttribute('href') : null;
+    menu.open = false;
+    if (focusWasInside) {
+      const equivalent = Array.from(
+        document.querySelectorAll<HTMLAnchorElement>('.desktop-nav a'),
+      ).find((link) => link.getAttribute('href') === href);
+      (equivalent ?? document.querySelector<HTMLAnchorElement>('.desktop-nav a'))?.focus();
+    }
+  });
+</script>

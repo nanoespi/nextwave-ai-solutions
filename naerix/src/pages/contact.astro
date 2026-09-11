@@ -1,0 +1,145 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Arrow from '../components/ui/Arrow.astro';
+const contacts = [
+  {
+    label: 'General enquiries',
+    email: 'hello@naerix.com',
+    description: 'For conversations about Naerix and our businesses.',
+  },
+  {
+    label: 'Investor enquiries',
+    email: 'investors@naerix.com',
+    description: 'For conversations about what we’re building next.',
+  },
+];
+---
+
+<BaseLayout
+  title="Contact Naerix | Start a conversation."
+  description="Contact information for Naerix. Our new email addresses are coming soon."
+>
+  <div id="top"></div>
+  <Header />
+  <main id="main" tabindex="-1">
+    <section class="contact shell" aria-labelledby="contact-title">
+      <p class="section-label eyebrow">
+        <span class="index">01 /</span> Contact
+      </p>
+      <h1 id="contact-title" class="page-heading">
+        Good things start
+        <br />
+        <span>with a conversation.</span>
+      </h1>
+      <div class="contact-content">
+        <div>
+          <p class="contact-intro">
+            A shared interest.
+            <br />A different perspective.
+            <br />
+            An idea worth building.
+          </p>
+          <p class="body-copy">
+            Our new contact details are coming soon.
+            <br />
+            In the meantime, get to know our businesses.
+          </p>
+          <a class="text-link" href="/#businesses">
+            <span>Explore our businesses</span>
+            <Arrow />
+          </a>
+        </div>
+        <div class="contact-addresses">
+          {contacts.map((c) => (
+            <article>
+              <p class="eyebrow">{c.label}</p>
+              <p class="address">{c.email}</p>
+              <p class="address-status eyebrow">Email address coming soon</p>
+              <p class="contact-description">{c.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+<style>
+  .contact {
+    padding-block: 76px 120px;
+  }
+  h1 {
+    margin-top: 48px;
+    font-size: clamp(48px, 6.9vw, 99px);
+  }
+  h1 span {
+    color: #a8ae9b;
+  }
+  .contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    border-top: 1px solid var(--rule);
+    margin-top: 65px;
+    padding-top: 48px;
+  }
+  .contact-intro {
+    font-size: 27px;
+    letter-spacing: -0.035em;
+    line-height: 1.4;
+  }
+  .body-copy {
+    font-size: 14px;
+    margin-top: 28px;
+  }
+  .text-link {
+    margin-top: 24px;
+    font-size: 12px;
+  }
+  .contact-addresses article {
+    padding-bottom: 36px;
+  }
+  .contact-addresses article + article {
+    border-top: 1px solid var(--rule);
+    padding-top: 32px;
+  }
+  .contact-addresses .eyebrow {
+    color: var(--ink-subtle);
+    font-size: 10px;
+  }
+  .address {
+    font-size: clamp(23px, 2.7vw, 39px);
+    letter-spacing: -0.045em;
+    margin: 17px 0 12px;
+    overflow-wrap: anywhere;
+  }
+  .address-status {
+    color: var(--sage) !important;
+  }
+  .contact-description {
+    font-size: 12px;
+    color: var(--ink-muted);
+    margin-top: 18px;
+    line-height: 1.8;
+  }
+  @media (max-width: 740px) {
+    .contact {
+      padding-block: 45px 65px;
+    }
+    h1 {
+      margin-top: 35px;
+      font-size: clamp(42px, 9.2vw, 65px);
+    }
+    .contact-content {
+      grid-template-columns: 1fr;
+      gap: 45px;
+      margin-top: 40px;
+      padding-top: 32px;
+    }
+    .address {
+      font-size: 29px;
+    }
+  }
+</style>

@@ -1,0 +1,95 @@
+---
+import Arrow from '../ui/Arrow.astro';
+---
+
+<section id="approach" class="approach" aria-labelledby="approach-title" tabindex="-1">
+  <div class="shell approach-inner">
+    <p class="section-label eyebrow">
+      <span class="index">02 /</span> Our approach
+    </p>
+    <div class="approach-body">
+      <h2 id="approach-title">
+        The best tools deserve
+        <br />
+        <span>the right hands.</span>
+      </h2>
+      <div class="approach-columns">
+        <p>
+          Every industry has people who understand it deeply. We believe technology does its best
+          work when it builds on that knowledge.
+        </p>
+        <div>
+          <p>
+            Naerix brings skilled experts and builders together to create and operate businesses.
+            Human judgment guides the work. Technology expands what’s possible.
+          </p>
+          <a class="text-link" href="/about/">
+            <span>Our thinking, in practice</span>
+            <Arrow />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .approach {
+    background: #d9dece;
+    color: #20251d;
+    padding-block: 95px;
+  }
+  .approach-inner {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 38px;
+  }
+  .section-label {
+    color: #4c5544;
+    padding-top: 6px;
+  }
+  .section-label .index {
+    color: #4c5544;
+  }
+  h2 {
+    font-size: clamp(36px, 4.45vw, 65px);
+    line-height: 1.07;
+    letter-spacing: -0.055em;
+  }
+  h2 span {
+    color: #69745d;
+  }
+  .approach-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 40px;
+  }
+  p:not(.section-label) {
+    font-size: 14px;
+    line-height: 1.9;
+  }
+  .text-link {
+    margin-top: 25px;
+    font-size: 12px;
+  }
+  .text-link span {
+    border-color: #78836b;
+  }
+  .approach :global(:focus-visible) {
+    outline-color: #283223;
+  }
+  @media (max-width: 740px) {
+    .approach {
+      padding-block: 62px;
+    }
+    .approach-inner {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    .approach-columns {
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-top: 28px;
+    }
+  }
+</style>

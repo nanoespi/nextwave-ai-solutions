@@ -1,0 +1,20 @@
+:root {
+  --surface: #111210;
+  --surface-raised: #191b17;
+  --surface-soft: #22241f;
+  --ink: #efeee8;
+  --ink-muted: #b1b3a8;
+  --ink-subtle: #929589;
+  --accent: #d4ff3d;
+  --rule: #373a31;
+  --rule-strong: #636856;
+  --sage: #b2c1a0;
+  --copper: #d29b79;
+  --cream: #f5f0e8;
+  --font-sans: 'Inter', Arial, sans-serif;
+  --font-mono: 'Courier New', monospace;
+  --font-brand: 'Xolonium', Arial, sans-serif;
+  --page-width: 1440px;
+  --gutter: clamp(24px, 4.4vw, 80px);
+  --ease: cubic-bezier(0.2, 0.75, 0.25, 1);
+}

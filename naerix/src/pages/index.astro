@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Hero from '../components/sections/Hero.astro';
+import Businesses from '../components/sections/Businesses.astro';
+import Approach from '../components/sections/Approach.astro';
+import Values from '../components/sections/Values.astro';
+---
+
+<BaseLayout>
+  <div id="top"></div>
+  <Header />
+  <main id="main" tabindex="-1">
+    <Hero />
+    <Businesses />
+    <Approach />
+    <Values />
+  </main>
+  <Footer />
+</BaseLayout>
