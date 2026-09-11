@@ -36,7 +36,7 @@ The user's preference for dark, bold architectural design governs the result. On
 
 Source reference: `nanoespi/nextwave-ai-solutions`, baseline commit `ab3dd0ab3e8c7e5207afe8a162899b90c7cfe156`.
 
-The entire redesign is an independent app in `naerix/`, on the local `design/naerix-portfolio` branch. The original repository-root Astro app is unmodified. Nothing has been deployed, pushed, merged, or connected to a domain.
+The entire redesign is an independent app in `naerix/`, prepared on `design/naerix-portfolio` and released on `v2`. The original repository-root Astro app is unmodified. Version 2 targets the existing Cloudflare Pages project at `nextwaveaisolutions.com`; the repository's original `main` branch and previous immutable deployment are preserved. See the README for release and rollback details.
 
 The app follows the existing languages and directory conventions: Astro static output, scoped `.astro` styles, TypeScript scripts, Tailwind CSS v4, shared CSS tokens, JSON content, and Playwright tests. Native semantic elements supply the interaction foundation; no React or additional UI primitive library is needed. The existing package versions and build conventions are retained. Axe is added only as a development-time accessibility checker.
 
@@ -47,7 +47,7 @@ The app follows the existing languages and directory conventions: Astro static o
 - Jonesboro Sage: brand treatment informed by the approved live public-data preview. The outbound link uses `https://jonesborosage.com`; the subsidiary's own preview/domain transition remains independent of this app.
 - Three illustrative founder slots. Replace with the actual number of founders and approved names, roles, portraits, and bios later.
 - `hello@naerix.com` and `investors@naerix.com` are proposed placeholder addresses. They are labeled as coming soon and deliberately rendered as text until the mailboxes exist.
-- Canonical URLs use `https://naerix.com`. The preview has `noindex, nofollow` and a disallow-all robots file. Domain configuration, indexability, social sharing artwork, final contact information, and deployment belong to the later launch step.
+- At the owner's launch instruction, canonical URLs and the sitemap use `https://nextwaveaisolutions.com` and production indexing is enabled. Cloudflare supplies the preview noindex header. Social sharing artwork and final contact information remain deferred.
 
 ## Independent advisory review
 

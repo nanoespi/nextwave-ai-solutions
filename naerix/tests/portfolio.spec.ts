@@ -92,7 +92,7 @@ test('all internal links resolve and point to real fragment targets', async ({ p
     pageLinks.forEach((href) => links.add(href));
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       'href',
-      `https://naerix.com${path}`,
+      `https://nextwaveaisolutions.com${path}`,
     );
   }
   for (const href of links) {

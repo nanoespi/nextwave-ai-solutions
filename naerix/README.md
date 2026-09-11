@@ -1,8 +1,8 @@
-# Naerix portfolio website
+# Naerix portfolio website — version 2
 
 An independent Astro application for the Naerix parent brand, created with Mason's web design skill. [Design direction, seed, and content decisions](DESIGN_DIRECTION.md).
 
-The original site remains in the repository root with its files unchanged. This folder is the complete new application; work is isolated on `design/naerix-portfolio`. The existing site's hosting, repository main branch, DNS, and deployment are untouched.
+The original site remains in the repository root with its files unchanged. This folder is the complete version 2 application on the `v2` branch. The repository's `main` branch retains the original site at `ab3dd0ab3e8c7e5207afe8a162899b90c7cfe156`; the `v1.0.0` tag preserves that source revision. Version 2 is released as `v2.0.0` and targets **https://nextwaveaisolutions.com**.
 
 ## Run locally
 
@@ -66,8 +66,22 @@ The suite checks all five pages at **1440, 768, 390, and 320px**, including axe 
 
 Verified September 10, 2026: `astro check` reported zero errors, warnings, or hints; the static build generated six pages; **all 17 Playwright tests passed** in Chromium, with zero axe violations at the four tested widths. The original app's tracked files remain unchanged.
 
-## Later content and launch work
+## Deployment and rollback
 
-Replace the three illustrative founder slots with approved content. Confirm and activate the proposed contact mailboxes. Extend the two product pages when their content is ready. Canonical metadata already targets `naerix.com`; search indexing remains disabled during this preview. The domain, social sharing artwork, indexability, email links, and hosting configuration can be completed for launch after visual review. Build output is `naerix/dist/`.
+Cloudflare Pages project: `nextwave-ai-solutions`. This is an existing Direct Upload project; GitHub pushes alone do not deploy it. Its production branch is `v2`. Build and deploy **from this `naerix/` directory** so the original root application's Functions are not included:
 
-No changes to the original site's deployment are needed to review this local app.
+```powershell
+npm.cmd ci
+npm.cmd run check
+npm.cmd run build
+npm.cmd test
+npx.cmd wrangler pages deploy dist --project-name nextwave-ai-solutions --branch v2
+```
+
+Authenticate Wrangler through Cloudflare or a scoped local `CLOUDFLARE_API_TOKEN`. Never commit credentials. A different branch name creates a preview deployment. Both the apex and `www` domains remain attached to the existing Pages project; `www` redirects to the apex. Canonicals, Open Graph URLs, and the sitemap use `nextwaveaisolutions.com`. Production crawling is enabled; Cloudflare marks preview deployments with its `X-Robots-Tag: noindex` header.
+
+The previous live site remains available at **https://df03b93c.nextwave-ai-solutions.pages.dev** (deployment `df03b93c-da68-4602-9d7c-90c76b0e8bbe`). To restore it, open this Pages project's Deployments in Cloudflare and select **Rollback to this deployment** for that deployment. Rollback restores the deployed site without changing Git history. Keep that deployment; do not delete it. To resume version 1 development, use `main` and the original root app. The previous upload was marked dirty, so its immutable deployment is the exact live reference; the Git tag preserves the committed source baseline.
+
+## Later content
+
+Replace the three illustrative founder slots with approved content. Confirm and activate the proposed contact mailboxes. Extend the two product pages when their content is ready. Custom social sharing artwork and any future move to `naerix.com` remain separate work. Build output is `naerix/dist/`.
